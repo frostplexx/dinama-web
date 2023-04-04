@@ -9,4 +9,8 @@
 - color scheme
   - black and dark purple?
   - space
-  
+
+## TODO
+
+- [ ] Make it so that if the screen is too small the text is under the welcome traveler
+- [ ] implement header navigation
