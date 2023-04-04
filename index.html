@@ -1,23 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
-		<title>Daniel Inama</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<link rel="stylesheet" type="text/css" href="stars.css">
+		<title>Website Concept</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<script src="particles.min.js"></script>
+		<script src="app.js"></script>
 	</head>
 	<body>
-		<section class="wrapper">
-			<div id="stars"></div>
-			<div id="stars2"></div>
-			<div id="stars3"></div>
-			<div id="title">
-				<span>Welcome</span>
-				<br>
-				<span>Traveler</span>
-
-			</div>
-		</section>
+		<header>
+			<span class="header-item active">Home</span>
+			<span class="header-item">Projects</span>
+			<span class="header-item">About</span>
+			<span class="header-item">Contact</span>
+		</header>
+		<table>
+			<tbody>
+			<tr>
+				<td>
+					<div id="title">
+						<span id="title_welcome">Welcome</span>
+						<br>
+						<span id="title_traveler">Traveler </span>
+					</div>
+				</td>
+				<td>
+					<span id="text">
+						Seems that you've found my cosmic corner! Here I want to showcase some of my plentyful project. Consider this a playground and join me as we explore the infinite possibilities of the digital universe!
+					</span>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<div id="particles-js"></div>
 	</body>
+
 </html>

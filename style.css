@@ -1,24 +1,93 @@
-html {
+:root {
+	background: radial-gradient(ellipse at bottom, #1b2735 0%,#090a0f 100%);
 	height: 100%;
 	overflow: hidden;
-	background: radial-gradient(ellipse at bottom, #1b2735 0%,#090a0f 100%);
+}
+
+span{
+	color: white;
+}
+
+header{
+	margin: 10px;
+	background: transparent;
+}
+
+
+.header-item{
+	font-family: "Cascadia Code", monospace;
+	font-size: 15px;
+	padding: 10px;
+	opacity: 0.2;
+}
+
+.header-item:hover{
+	opacity: .5;
+}
+
+.header-item.active{
+	opacity: 1;
+}
+
+
+table{
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 50%;
+	width: 50%;
+	margin: auto;
 }
 
 #title {
-	position: absolute;
-	top: 50%;
-	left: 0;
-	right:0;
-	text-align: center;
+	margin-right: 40px;
+	top: 0;
 	color: white;
-	font-weight: 300;
-	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	font-weight: 500;
+	font-family: "Cascadia Code", monospace;
 	font-size: 40px;
 }
 
-#title span {
-	background: -webkit-linear-gradient(white, #38495a);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+#text {
+	text-align: center;
+	color: white;
+	font-family: 'Cascadia Code';
 }
 
+#title_traveler {
+	z-index: -1;
+	opacity: .5;
+	backdrop-filter: blur(10px);
+}
+
+#title_welcome {
+	z-index: 1;
+}
+#wrapper{
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 25px;
+	padding: 100px;
+	backdrop-filter: blur(10px);
+}
+
+
+/* make it so that the stars take up the whole screen*/
+#particles-js {
+	position: fixed;
+	height: 100%;
+	z-index: 0;
+}
+
+
+/* font stuff */
+@font-face {
+	font-family: 'Cascadia Code';
+	src: "assets/fonts/CascadiaCode-Regular.ttf";
+}
+
+
+@font-face {
+	font-family: 'Cascadia Code';
+	src: "assets/fonts/CascadiaCodeItalic.ttf";
+	font-style: italic;
+}
