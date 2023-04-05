@@ -2,10 +2,11 @@
 	background: radial-gradient(ellipse at bottom, var(--color-spotlight) 0%, var(--color-background) 100%);
 	height: 100%;
 	overflow: hidden;
-	cursor: none !important;
+	overflow-y: scroll;
+	/* cursor: none !important; */
 	/* colors */
-	--color-spotlight: #1b2735;
-	--color-background: #090a0f;
+	--color-spotlight: #241b35;
+	--color-background: #0c090f;
 	--color-text: #e5e5e5;
 	--color-text-secondary: #a9a9a9;
 	--color-accent: #c76eff;
@@ -37,7 +38,8 @@ span{
 }
 
 header{
-	position: absolute;
+	position: fixed;
+	z-index: 10000;
 }
 
 table{
@@ -100,18 +102,14 @@ table{
 	opacity: .5;
 }
 
-
-@keyframes scroll {
-	0% {
-		bottom: 80%;
-		opacity: 1;
-	}
-	100% {
-		bottom: 20%;
-		opacity: 0;
-	}
+#container{
+	color: white;
+	position: absolute;
+	top: 100%;
+	height: 100%;
+	background: radial-gradient(ellipse at top, var(--color-spotlight) 0%, var(--color-background) 100%);
+	width: 100%;
 }
-
 
 
 

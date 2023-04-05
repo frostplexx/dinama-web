@@ -8,7 +8,6 @@ window.onload = function () {
 
 
 	// Cursor
-
 	const cursor = document.querySelector(".cursor");
 
 	document.body.onpointermove = event => {
@@ -61,5 +60,26 @@ window.onload = function () {
 		}, 50);
 		iterations = 0;
 	}, 5000);
+
+
+	//hide the scroll indicator after the user has scrolled
+	let scrollIndicator = document.querySelector(".scroll-indicator");
+	// Listen for scroll events
+	window.addEventListener("scroll", () => {
+		// Check the current scroll position
+		const scrollPosition = window.scrollY;
+	
+		// If the scroll position is greater than 0, fade out the scroll indicator
+		if (scrollPosition > 0) {
+			// linear interpolation of scroll distance between 1 and 0
+			const opacity = 1 - Math.min(scrollPosition / 100, 1);
+		  scrollIndicator.style.opacity = opacity / 2;
+		} else {
+		  // Otherwise, fade in the scroll indicator
+		  scrollIndicator.style.opacity = 0.5;
+		}
+	  });
+	
+	  // Set up CSS transitions for the scroll indicator
 	
 }
