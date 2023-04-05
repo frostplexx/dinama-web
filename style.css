@@ -1,9 +1,7 @@
 :root {
-	background: radial-gradient(ellipse at bottom, var(--color-spotlight) 0%, var(--color-background) 100%);
 	height: 100%;
-	overflow: hidden;
 	overflow-y: scroll;
-	/* cursor: none !important; */
+	background: #100D15;
 	/* colors */
 	--color-spotlight: #241b35;
 	--color-background: #0c090f;
@@ -25,11 +23,11 @@ span{
 	font-family: "Cascadia Code", monospace;
 	font-size: 15px;
 	padding: 10px;
-	color: rgba(255, 255, 255, 0.15);
+	color: rgba(255, 255, 255, 0.3);
 }
 
 .header-item:hover{
-	color: rgba(255, 255, 255, 0.3);
+	color: rgba(255, 255, 255, 0.5);
 }
 
 .header-item.active{
@@ -43,7 +41,7 @@ header{
 }
 
 table{
-	position: absolute;
+	position: relative;
 	left: 0;
 	right: 0;
 	top: 50%;
@@ -68,7 +66,7 @@ table{
 }
 
 .cursor {
-	position: absolute;
+	position: fixed;
 	height: 6px;
 	width: 6px;
 	background-color: var(--color-accent);
@@ -95,28 +93,45 @@ table{
 .scroll-indicator{
 	position: absolute;
 	left: 50%;
-	bottom: 10px;
+	bottom: 15px;
 	color: var(--color-text);
 	font-family: 'Cascadia Code';
 	font-size: 14px;
 	opacity: .5;
 }
 
-#container{
-	color: white;
-	position: absolute;
-	top: 100%;
-	height: 100%;
-	background: radial-gradient(ellipse at top, var(--color-spotlight) 0%, var(--color-background) 100%);
+
+.section{
+	position: relative;
+	height: 100vh;
 	width: 100%;
+	padding: 0;
+	margin: -10;
 }
 
+#projects{
+	background: #100D15;
+}
 
-
+#hero {
+	background: radial-gradient(ellipse at top, var(--color-spotlight) 0%, var(--color-background) 100%);
+}
+#carousel{
+	position: relative;
+	background: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(5px);
+	height: 40rem;
+	border-radius: 25px;
+	margin: 2rem;
+	top: 10%;
+	z-index: 1000;
+}
 /* make it so that the stars take up the whole screen*/
 #particles-js {
-	position: fixed;
-	height: 100%;
+	top: 0;
+	position: absolute;
+	height: 400%;
+	overflow: hidden;
 	z-index: 0;
 }
 
