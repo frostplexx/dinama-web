@@ -13,11 +13,16 @@
 
 span{
 	color: var(--color-text);
+	font-family: "Cascadia Code", monospace;
 }
 
 .highlighted {
-	color: var(--color-accent);
+	color: transparent;
+	background: linear-gradient(121deg,#c76eff  0%, #974fc5 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
 }
+
 
 .header-item{
 	font-family: "Cascadia Code", monospace;
@@ -116,16 +121,182 @@ table{
 #hero {
 	background: radial-gradient(ellipse at top, var(--color-spotlight) 0%, var(--color-background) 100%);
 }
+
 #carousel{
 	position: relative;
-	background: rgba(255, 255, 255, 0.2);
+	display: flex;
+	background: radial-gradient(ellipse at top right, rgba(50, 30, 70, 0.1) 0%, rgba(100, 100, 100, 0.1) 100%);
 	backdrop-filter: blur(5px);
 	height: 40rem;
 	border-radius: 25px;
 	margin: 2rem;
 	top: 10%;
-	z-index: 1000;
+	z-index: 2;
+	box-sizing: border-box;
+	padding: 20px;
+	border: solid 2px rgba(255, 255, 255, 0.1);
 }
+
+#carousel::after{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(ellipse at top left, rgba(50, 30, 70, 0.1) 0%, rgba(100, 100, 100, 0.1) 100%);
+}
+
+
+
+#satellite{
+	z-index: 3;
+	position: absolute;
+	top: 37%;
+	right: 54%;
+	width: 100%;
+	height: 100%;
+	transform: rotate(235deg);
+}
+
+#satellite img{
+	scale: 0.30;
+	position: absolute;
+	animation: bobbing 3s infinite;
+}
+
+#satellite #body{
+	z-index: 4;
+}
+
+#satellite #flames{
+	z-index: 3;
+	animation: flameFade 3s infinite;
+}
+
+#more {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+
+
+/* Carousel */
+
+.slider{
+	position: relative;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+/* pages should appear side by side with one in the middle one to the left and one to the right */
+.page {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	position: relative;
+	margin: .5rem;
+	border-radius: 10px;
+	background: rgba(51, 31, 56, 0.5);
+	border: solid 2px rgba(255, 255, 255, 0.1);
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0.5rem;
+}
+
+
+
+
+.fade.page{
+	/* add a background that fades out */
+	background: linear-gradient(270deg, rgba(51, 31, 56, 0.5)  0%, rgba(100,100, 100, 0) 75%) !important;
+	border-right: solid 2px rgba(255, 255, 255, 0.1);
+	border-left: none;
+	border-top:  2px rgba(255, 255, 255, 0.1);
+	border-bottom: none;
+	scale: .98;
+	
+
+}
+
+
+
+.slider_img{
+	position: relative;
+    width: 100%;
+	height: 50%;
+	object-fit: cover;
+	top: 0;
+}
+
+.slider_title{
+	font-family: "Cascadia Code", monospace;
+	font-size: 34px;
+	align-self: flex-start;
+}
+
+.slider_text_box{
+	width: 100%;
+	height: 50%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-size: 14px;
+}
+
+.smaller{
+	scale: .98;
+}
+
+
+
+.hidden{
+	display: none;
+}
+
+
+
+/* random flicker */
+@keyframes flameFade {
+	20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
+		opacity: 0.8;
+	}
+	0%{
+		transform: translateY(0);
+		rotate: 0deg;
+	}
+	50%{
+		transform: translateY(-10px);
+		rotate: 0.5deg;
+	}
+	100%{
+		transform: translateY(0);
+		rotate: 0deg;
+	}
+}
+
+/* bob up and down */
+@keyframes bobbing{
+	0%{
+		transform: translateY(0);
+		rotate: 0deg;
+	}
+	50%{
+		transform: translateY(-10px);
+		rotate: 0.5deg;
+	}
+	100%{
+		transform: translateY(0);
+		rotate: 0deg;
+	}
+}
+
 /* make it so that the stars take up the whole screen*/
 #particles-js {
 	top: 0;
@@ -134,6 +305,7 @@ table{
 	overflow: hidden;
 	z-index: 0;
 }
+
 
 
 /* font stuff */
