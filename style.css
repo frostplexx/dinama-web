@@ -1,322 +1,48 @@
-:root {
-	height: 100%;
-	overflow-y: scroll;
-	background: #100D15;
-	/* colors */
-	--color-spotlight: #241b35;
-	--color-background: #0c090f;
-	--color-text: #e5e5e5;
-	--color-text-secondary: #a9a9a9;
-	--color-accent: #c76eff;
-	
+:root{
+    --background-color: #000A17;
+    --color-gray: #ffffff;
+    --accent-color: #1e90ff;
 }
 
-span{
-	color: var(--color-text);
-	font-family: "Cascadia Code", monospace;
-}
-
-.highlighted {
-	color: transparent;
-	background: linear-gradient(121deg,#c76eff  0%, #974fc5 100%);
-	-webkit-background-clip: text;
-	background-clip: text;
-}
-
-
-.header-item{
-	font-family: "Cascadia Code", monospace;
-	font-size: 15px;
-	padding: 10px;
-	color: rgba(255, 255, 255, 0.3);
-}
-
-.header-item:hover{
-	color: rgba(255, 255, 255, 0.5);
-}
-
-.header-item.active{
-	color: var(--color-text);
-	z-index: 1;
-}
-
-header{
-	position: fixed;
-	z-index: 10000;
-}
-
-table{
-	position: relative;
-	left: 0;
-	right: 0;
-	top: 50%;
-	width: 50%;
-	margin: auto;
-}
-
-#title {
-	margin-right: 40px;
-	top: 0;
-	color: var(--color-text);
-	font-weight: 500;
-	font-family: "Cascadia Code", monospace;
-	font-size: 40px;
-}
-
-#text {
-	text-align: center;
-	color: var(--color-text);
-	font-family: 'Cascadia Code';
-	text-align: justify;
-}
-
-.cursor {
-	position: fixed;
-	height: 6px;
-	width: 6px;
-	background-color: var(--color-accent);
-	border-radius: 50%;
-}
-
-
-#title_traveler {
-	z-index: -1;
-	opacity: .5;
-	backdrop-filter: blur(10px);
-}
-
-#title_welcome {
-	z-index: 1;
-}
-#wrapper{
-	background: rgba(255, 255, 255, 0.1);
-	border-radius: 25px;
-	padding: 100px;
-	backdrop-filter: blur(10px);
-}
-
-.scroll-indicator{
-	position: absolute;
-	left: 50%;
-	bottom: 15px;
-	color: var(--color-text);
-	font-family: 'Cascadia Code';
-	font-size: 14px;
-	opacity: .5;
-}
-
-
-.section{
-	position: relative;
-	height: 100vh;
-	width: 100%;
-	padding: 0;
-	margin: -10;
-}
-
-#projects{
-	background: #100D15;
-}
-
-#hero {
-	background: radial-gradient(ellipse at top, var(--color-spotlight) 0%, var(--color-background) 100%);
-}
-
-#carousel{
-	position: relative;
+body{
+    background-color: var(--background-color);
+    color: var(--accent-color);
+    font-family: monospace;
+    height: 100vh;
+    overflow: hidden;
 	display: flex;
-	background: radial-gradient(ellipse at top right, rgba(50, 30, 70, 0.1) 0%, rgba(100, 100, 100, 0.1) 100%);
-	backdrop-filter: blur(5px);
-	height: 40rem;
-	border-radius: 25px;
-	margin: 2rem;
-	top: 10%;
-	z-index: 2;
-	box-sizing: border-box;
-	padding: 20px;
-	border: solid 2px rgba(255, 255, 255, 0.1);
-}
-
-#carousel::after{
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: radial-gradient(ellipse at top left, rgba(50, 30, 70, 0.1) 0%, rgba(100, 100, 100, 0.1) 100%);
-}
-
-
-
-#satellite{
-	z-index: 3;
-	position: absolute;
-	top: 37%;
-	right: 54%;
-	width: 100%;
-	height: 100%;
-	transform: rotate(235deg);
-}
-
-#satellite img{
-	scale: 0.30;
-	position: absolute;
-	animation: bobbing 3s infinite;
-}
-
-#satellite #body{
-	z-index: 4;
-}
-
-#satellite #flames{
-	z-index: 3;
-	animation: flameFade 3s infinite;
-}
-
-#more {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
-}
-
-
-
-/* Carousel */
-
-.slider{
-	position: relative;
-	height: 100%;
-	width: 100%;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
 	justify-content: center;
-}
-
-/* pages should appear side by side with one in the middle one to the left and one to the right */
-.page {
-	height: 100%;
-	width: 100%;
-	display: flex;
-	position: relative;
-	margin: .5rem;
-	border-radius: 10px;
-	background: rgba(51, 31, 56, 0.5);
-	border: solid 2px rgba(255, 255, 255, 0.1);
 	align-items: center;
 	flex-direction: column;
-	justify-content: center;
-	padding: 0.5rem;
 }
 
 
-
-
-.fade.page{
-	/* add a background that fades out */
-	background: linear-gradient(270deg, rgba(51, 31, 56, 0.5)  0%, rgba(100,100, 100, 0) 75%) !important;
-	border-right: solid 2px rgba(255, 255, 255, 0.1);
-	border-left: none;
-	border-top:  2px rgba(255, 255, 255, 0.1);
-	border-bottom: none;
-	scale: .98;
-	
-
+#hero{
+    padding: 0;
+    margin: 0;
+	font-size: 1.5rem;
+	font-weight: lighter;
 }
 
-
-
-.slider_img{
-	position: relative;
-    width: 100%;
-	height: 50%;
-	object-fit: cover;
-	top: 0;
+#hero h1::after{
+    content: "";
+    margin: 0 0 0 -8px;
+    width: 10px;
+    height: 33px;
+    background: var(--color-gray);
+	display: inline-block;
+    animation: blink 1s steps(2) infinite;
 }
 
-.slider_title{
-	font-family: "Cascadia Code", monospace;
-	font-size: 34px;
-	align-self: flex-start;
+@keyframes blink{
+    0%{
+        opacity: 0;
+    }
 }
 
-.slider_text_box{
-	width: 100%;
-	height: 50%;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	font-size: 14px;
-}
-
-.smaller{
-	scale: .98;
-}
-
-
-
-.hidden{
-	display: none;
-}
-
-
-
-/* random flicker */
-@keyframes flameFade {
-	20%, 21.999%, 63%, 63.999%, 65%, 69.999% {
-		opacity: 0.8;
-	}
-	0%{
-		transform: translateY(0);
-		rotate: 0deg;
-	}
-	50%{
-		transform: translateY(-10px);
-		rotate: 0.5deg;
-	}
-	100%{
-		transform: translateY(0);
-		rotate: 0deg;
-	}
-}
-
-/* bob up and down */
-@keyframes bobbing{
-	0%{
-		transform: translateY(0);
-		rotate: 0deg;
-	}
-	50%{
-		transform: translateY(-10px);
-		rotate: 0.5deg;
-	}
-	100%{
-		transform: translateY(0);
-		rotate: 0deg;
-	}
-}
-
-/* make it so that the stars take up the whole screen*/
-#particles-js {
-	top: 0;
-	position: absolute;
-	height: 400%;
-	overflow: hidden;
-	z-index: 0;
-}
-
-
-
-/* font stuff */
-@font-face {
-	font-family: 'Cascadia Code';
-	src: "assets/fonts/CascadiaCode-Regular.ttf";
-}
-
-
-@font-face {
-	font-family: 'Cascadia Code';
-	src: "assets/fonts/CascadiaCodeItalic.ttf";
-	font-style: italic;
+#text{
+	font-weight: 100;
+	line-height: 1.5;
+	text-align: center;
+	max-width: 60%;
 }
