@@ -8,13 +8,55 @@
 		<link rel="icon" href="assets/icon.ico" type="image/x-icon"/>
 	</head>
 	<body>
-		<div id="hero">
-			<h1>
-				Hello World
-			</h1>
+		<div id="container">
+			<div id="hero">
+				<h1>
+					>Hello World
+				</h1>
+			</div>
+			<div id="terminal-window">
+				<div id="terminal-status-bar">
+					<div id="close-button"></div>
+					<div id="minimize-button"></div>
+					<div id="maximize-button"></div>
+				</div>
+				<div id="terminal-body">
+					<p><span id="location">me@portfolio:</span><span id="location2">~ $</span> cat hello.txt</p>
+					<p class="subtext">
+						Hello there! Welcome to my website where I showcase some of my projects and fun ideas. Browse through the files to discover more about my work. If you have any questions or just want to chat, feel free to reach out. Enjoy your time here!
+					</p>
+					<p><span id="location">me@portfolio:</span><span id="location2">~ $</span> cd projects/ && ls</p>
+					<div id="projects">
+					</div>
+					<p><span id="location">me@portfolio:</span><span id="location2">~/projects $</span> cd ..</p>
+					<p><span id="location">me@portfolio:</span><span id="location2">~ $</span> cd socials/ && ls</p>
+					<div id="socials">
+						<a href="https://github.com/Frostplexx">GitHub</a>
+						<span>Frostplexx#3907.discord</span>
+					</div>
+				</div>
+			</div>
 		</div>
-		<!-- <p id="text">
-			It seems that you've found my cosmic corner! Here I want to showcase some of my plentyful projects. Consider this a playground and join me as we explore the infinite possibilities of the digital universe!
-		</p> -->
 	</body>
+	<script>
+		//load the projects from projects.json
+		var projects = [];
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			console.log(this.readyState);
+			if (this.readyState == 4 && this.status == 200){
+				projects = JSON.parse(this.responseText)["projects"];
+				for(let i = 0; i < projects.length; i++){
+					console.log(projects[i]);
+					var project = document.createElement("div");
+					project.className = "project";
+					project.innerHTML = "<a href=\"" + projects[i]["href"] + "\">" + projects[i]["name"] +" -- " + projects[i]["description"] + "</a>";
+					document.getElementById("projects").appendChild(project);
+
+				}
+			}
+		};
+		xhttp.open("GET", "projects.json", true);
+		xhttp.send();
+	</script>
 </html>
