@@ -1,9 +1,9 @@
 {
     "projects": [
         {
-            "name": "MetisBot",
-            "description": "A Discord bot to help with managing DnD campaigns",
-            "href": "https://github.com/MetisBot"
+            "name": "Winston",
+            "description": "A beautiful and native Reddit client for iOS",
+            "href": "https://github.com/lo-cafe/winston"
         },
         {
             "name": "obsidian-github-issues",

@@ -21,18 +21,19 @@
 					<div id="maximize-button"></div>
 				</div>
 				<div id="terminal-body">
-					<p><span id="location">me@portfolio:</span><span id="location2">~ $</span> cat hello.txt</p>
+					<p><span class="location">me@portfolio:</span><span class="location2">~ $</span> cat hello.txt</p>
 					<p class="subtext">
 						Hello there! Welcome to my website where I showcase some of my projects and fun ideas. Browse through the files to discover more about my work. If you have any questions or just want to chat, feel free to reach out. Enjoy your time here!
 					</p>
-					<p><span id="location">me@portfolio:</span><span id="location2">~ $</span> cd projects/ && ls</p>
-					<div id="projects">
-					</div>
-					<p><span id="location">me@portfolio:</span><span id="location2">~/projects $</span> cd ..</p>
-					<p><span id="location">me@portfolio:</span><span id="location2">~ $</span> cd socials/ && ls</p>
+					<div class="spacer"></div>
+					<p><span class="location">me@portfolio:</span><span class="location2">~ $</span> cd projects/ && ls</p>
+					<div id="projects"></div>
+					<div class="spacer"></div>
+					<p><span class="location">me@portfolio:</span><span class="location2">~/projects $</span> cd ..</p>
+					<p><span class="location">me@portfolio:</span><span class="location2">~ $</span> cd socials/ && ls</p>
 					<div id="socials">
 						<a href="https://github.com/Frostplexx">GitHub</a>
-						<span>Frostplexx#3907.discord</span>
+						<span>Frostplexx.discord</span>
 					</div>
 				</div>
 			</div>
@@ -43,16 +44,13 @@
 		var projects = [];
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function() {
-			console.log(this.readyState);
-			if (this.readyState == 4 && this.status == 200){
+			if (this.readyState === 4 && this.status === 200){
 				projects = JSON.parse(this.responseText)["projects"];
 				for(let i = 0; i < projects.length; i++){
-					console.log(projects[i]);
 					var project = document.createElement("div");
 					project.className = "project";
 					project.innerHTML = "<a href=\"" + projects[i]["href"] + "\">" + projects[i]["name"] +" -- " + projects[i]["description"] + "</a>";
 					document.getElementById("projects").appendChild(project);
-
 				}
 			}
 		};
