@@ -33,6 +33,7 @@
 					<p><span class="location">me@portfolio:</span><span class="location2">~ $</span> cd socials/ && ls</p>
 					<div id="socials">
 						<a href="https://github.com/Frostplexx">GitHub</a>
+						<a href="mailto:me@dinama.dev">me@dinama.dev</a>
 						<span>Frostplexx.discord</span>
 					</div>
 				</div>
@@ -47,7 +48,7 @@
 			if (this.readyState === 4 && this.status === 200){
 				projects = JSON.parse(this.responseText)["projects"];
 				for(let i = 0; i < projects.length; i++){
-					var project = document.createElement("div");
+					const project = document.createElement("div");
 					project.className = "project";
 					project.innerHTML = "<a href=\"" + projects[i]["href"] + "\">" + projects[i]["name"] +" -- " + projects[i]["description"] + "</a>";
 					document.getElementById("projects").appendChild(project);
