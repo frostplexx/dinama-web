@@ -61,7 +61,8 @@ body{
 
 
 #terminal-window {
-    background: var(--window-color);
+    /*background: var(--window-color);*/
+    /*background: var(--arc-background-simple-color);*/
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     overflow: hidden;
@@ -122,7 +123,7 @@ body{
     align-items: flex-start;
     justify-content: flex-start;
     font-size: 1.6em;
-    color: var(--text-primary);
+    color: var(--arc-palette-subtitle, var(--text-primary));
 }
 
 #terminal-body p{
@@ -130,11 +131,11 @@ body{
 }
 
 .location{
-    color: var(--accent-green);
+    color: var(--arc-palette-maxContrastColor, var(--accent-green)) !important;
 }
 
 .location2{
-    color: var(--accent-color);
+    color: var(--arc-palette-foregroundPrimary, var(--accent-color)) !important;
 }
 
 .project a{
@@ -145,7 +146,7 @@ body{
 
 
 .project{
-    background: var(--accent-color);
+    background: var(--arc-palette-foregroundPrimary, var(--accent-color)) !important;
     margin-bottom: 0.2rem;
     padding: 0.2rem;
 }
@@ -163,7 +164,7 @@ p{
 }
 
 #socials a{
-    color: var(--accent-color);
+    color: var(--arc-palette-foregroundPrimary, var(--accent-color));
 }
 
 #socials a:hover{

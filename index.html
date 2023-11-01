@@ -4,16 +4,16 @@
 		<title>Daniel Inama</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta charset="utf-8" />
-		<link rel="stylesheet" type="text/css" href="style.css"/>
+		<link rel="stylesheet" type="text/css" href="style.min.css"/>
 		<link rel="icon" href="assets/icon.ico" type="image/x-icon"/>
 	</head>
 	<body>
 		<div id="container">
-			<div id="hero">
-				<h1>
-					>Hello World
-				</h1>
-			</div>
+<!--			<div id="hero">-->
+<!--				<h1>-->
+<!--					>Hello World-->
+<!--				</h1>-->
+<!--			</div>-->
 			<div id="terminal-window">
 				<div id="terminal-status-bar">
 					<div id="close-button"></div>
@@ -41,21 +41,6 @@
 		</div>
 	</body>
 	<script>
-		//load the projects from projects.json
-		let projects = [];
-		const xhttp = new XMLHttpRequest();
-		xhttp.onreadystatechange = function() {
-			if (this.readyState === 4 && this.status === 200){
-				projects = JSON.parse(this.responseText)["projects"];
-				for(let i = 0; i < projects.length; i++){
-					const project = document.createElement("div");
-					project.className = "project";
-					project.innerHTML = "<a href=\"" + projects[i]["href"] + "\">" + projects[i]["name"] +" -- " + projects[i]["description"] + "</a>";
-					document.getElementById("projects").appendChild(project);
-				}
-			}
-		};
-		xhttp.open("GET", "projects.json", true);
-		xhttp.send();
+let projects=[];const xhttp=new XMLHttpRequest();xhttp.onreadystatechange=function(){if(this.readyState===4&&this.status===200){projects=JSON.parse(this.responseText)["projects"];for(let i=0;i<projects.length;i+=1){const project=document.createElement("div");project.className="project";project.innerHTML="<a href=\""+projects[i]["href"]+"\">"+projects[i]["name"]+" -- "+projects[i]["description"]+"</a>";document.getElementById("projects").appendChild(project)}}};xhttp.open("GET","projects.json",true);xhttp.send();
 	</script>
 </html>
