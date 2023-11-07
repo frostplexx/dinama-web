@@ -18,7 +18,7 @@
 			<div id="terminal-window">
 				<div id="terminal-status-bar">
 					<div id="close-button"></div>
-					<div id="minimize-button"></div>
+					<div id="minimize-button" onclick="dostuff()"></div>
 					<div id="maximize-button"></div>
 				</div>
 				<div id="terminal-body">
@@ -43,5 +43,10 @@
 	</body>
 	<script>
 let projects=[];const xhttp=new XMLHttpRequest();xhttp.onreadystatechange=function(){if(this.readyState===4&&this.status===200){projects=JSON.parse(this.responseText)["projects"];for(let i=0;i<projects.length;i+=1){const project=document.createElement("div");project.className="project";project.innerHTML="<a href=\""+projects[i]["href"]+"\">"+projects[i]["name"]+" -- "+projects[i]["description"]+"</a>";document.getElementById("projects").appendChild(project)}}};xhttp.open("GET","projects.json",true);xhttp.send();
+
+		const dostuff = () => {
+			document.location = "/playground/playground.html"
+		}
+
 	</script>
 </html>

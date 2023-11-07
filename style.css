@@ -1,4 +1,4 @@
-:root{
+    :root{
     --background-color: #24273a;
     --accent-color: #8aadf4;
     --accent-green: #a6da95;
@@ -102,6 +102,15 @@ body{
     border-radius: 50%;
     background: #ffbd2e;
     margin-right: 10px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+#minimize-button:hover {
+    opacity: 0.7;
+    height: 12px;
+    width: 12px;
 }
 
 #maximize-button{
