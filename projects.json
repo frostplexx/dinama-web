@@ -1,24 +1,25 @@
 {
-    "projects": [
-        {
-            "name": "Winston",
-            "description": "A beautiful and native Reddit client for iOS",
-            "href": "https://github.com/lo-cafe/winston"
-        },
-        {
-            "name": "obsidian-github-issues",
-            "description": "Embed GitHub issues in your Obsidian notes!",
-            "href": "https://github.com/Frostplexx/obsidian-github-issues"
-        }, 
-        {
-            "name": "EasyCrack",
-            "description": "The easiest way to install the Mr_Goldberg steam emulator",
-            "href": "https://github.com/Frostplexx/EasyCrack"
-        },
-        {
-            "name": "Discord One Dark",
-            "description": "The bevoled One Dark Atom theme brought to Discord",
-            "href": "https://github.com/Frostplexx/discord-one-dark"
-        }
-    ]
+  "projects": [
+    {
+      "name": "Winston",
+      "description": "A beautiful and native Reddit client for iOS",
+      "href": "https://github.com/lo-cafe/winston"
+    },
+    {
+      "name": "obsidian-github-issues",
+      "description": "Embed GitHub issues in your Obsidian notes!",
+      "href": "https://github.com/Frostplexx/obsidian-github-issues"
+    },
+    {
+      "name": "BinaryTools",
+      "description": "A raycast calculator plugin for binary, decimal, hex and octal numbers.<D-s>",
+      "href": "https://github.com/Frostplexx/BinaryTools"
+    },
+    {
+      "name": "Discord One Dark",
+      "description": "The bevoled One Dark Atom theme brought to Discord",
+      "href": "https://github.com/Frostplexx/discord-one-dark"
+    }
+  ]
 }
+
