@@ -1,57 +1,93 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<title>Daniel Inama</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta charset="utf-8" />
-		<meta name="theme-color" content="#363a4f">
-		<link rel="stylesheet" type="text/css" href="style.min.css"/>
-		<link rel="icon" href="assets/icon.ico" type="image/x-icon"/>
-	</head>
-	<body>
-		<div id="container">
-<!--			<div id="hero">-->
-<!--				<h1>-->
-<!--					>Hello World-->
-<!--				</h1>-->
-<!--			</div>-->
-			<div id="terminal-window">
-				<div id="terminal-status-bar">
-					<div id="close-button"></div>
-					<div id="minimize-button" onclick="dostuff()"></div>
-					<div id="maximize-button"></div>
-				</div>
-				<div id="terminal-body">
-					<p><span class="location">me@portfolio:</span><span class="location2">~ $</span> cat hello.txt</p>
-					<p class="subtext">
-						Hello there! Welcome to my website where I showcase some of my projects and fun ideas. Browse through the files to discover more about my work. If you have any questions or just want to chat, feel free to reach out. Enjoy your time here!
-					</p>
-					<div class="spacer"></div>
-					<p><span class="location">me@portfolio:</span><span class="location2">~ $</span> cd projects/ && ls</p>
-					<div id="projects"></div>
-					<div class="spacer"></div>
-					<p><span class="location">me@portfolio:</span><span class="location2">~/projects $</span> cd ..</p>
-					<p><span class="location">me@portfolio:</span><span class="location2">~ $</span> cd socials/ && ls</p>
-					<div id="socials">
-						<a href="https://github.com/Frostplexx">GitHub</a>
-						<a href="mailto:me@dinama.dev">me@dinama.dev</a>
-						<span>Frostplexx.discord</span>
-					</div>
-				</div>
-			</div>
-			<div id="footer">
-				<a href="privacy-policy.html" id="pp">Privacy Policy</a>
-			</div>
-		</div>
+  <head>
+    <title>Daniel Inama</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#363a4f" />
+    <!-- <link rel="stylesheet" type="text/css" href="style.min.css"/> -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="icon" href="assets/icon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div id="container">
+      <!--			<div id="hero">-->
+      <!--				<h1>-->
+      <!--					>Hello World-->
+      <!--				</h1>-->
+      <!--			</div>-->
+      <div id="terminal-window">
+        <div id="terminal-status-bar">
+          <div id="close-button"></div>
+          <div id="minimize-button" onclick="dostuff()">
+            <div id="minus"></div>
+          </div>
+          <div id="maximize-button"></div>
+        </div>
+        <div id="terminal-body">
+          <p>
+            <span class="location">me@portfolio:</span
+            ><span class="location2">~ $</span> cat hello.txt
+          </p>
+          <p class="subtext">
+            Hello there! Welcome to my website where I showcase some of my
+            projects and fun ideas. Browse through the files to discover more
+            about my work. If you have any questions or just want to chat, feel
+            free to reach out. Enjoy your time here!
+          </p>
+          <div class="spacer"></div>
+          <p>
+            <span class="location">me@portfolio:</span
+            ><span class="location2">~ $</span> cd projects/ && ls
+          </p>
+          <div id="projects"></div>
+          <div class="spacer"></div>
+          <p>
+            <span class="location">me@portfolio:</span
+            ><span class="location2">~/projects $</span> cd ..
+          </p>
+          <p>
+            <span class="location">me@portfolio:</span
+            ><span class="location2">~ $</span> cd socials/ && ls
+          </p>
+          <div id="socials">
+            <a href="https://github.com/Frostplexx">GitHub</a>
+            <a href="mailto:me@dinama.dev">me@dinama.dev</a>
+            <span>Frostplexx.discord</span>
+          </div>
+        </div>
+      </div>
+      <div id="footer">
+        <a href="privacy-policy.html" id="pp">Privacy Policy</a>
+      </div>
+    </div>
+  </body>
+  <script>
+    let projects = [];
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState === 4 && this.status === 200) {
+        projects = JSON.parse(this.responseText)["projects"];
+        for (let i = 0; i < projects.length; i += 1) {
+          const project = document.createElement("div");
+          project.className = "project";
+          project.innerHTML =
+            '<a href="' +
+            projects[i]["href"] +
+            '">' +
+            projects[i]["name"] +
+            " -- " +
+            projects[i]["description"] +
+            "</a>";
+          document.getElementById("projects").appendChild(project);
+        }
+      }
+    };
+    xhttp.open("GET", "projects.json", true);
+    xhttp.send();
 
-
-	</body>
-	<script>
-let projects=[];const xhttp=new XMLHttpRequest();xhttp.onreadystatechange=function(){if(this.readyState===4&&this.status===200){projects=JSON.parse(this.responseText)["projects"];for(let i=0;i<projects.length;i+=1){const project=document.createElement("div");project.className="project";project.innerHTML="<a href=\""+projects[i]["href"]+"\">"+projects[i]["name"]+" -- "+projects[i]["description"]+"</a>";document.getElementById("projects").appendChild(project)}}};xhttp.open("GET","projects.json",true);xhttp.send();
-
-		const dostuff = () => {
-			document.location = "/playground/playground.html"
-		}
-
-	</script>
+    const dostuff = () => {
+      document.location = "/playground/playground.html";
+    };
+  </script>
 </html>
