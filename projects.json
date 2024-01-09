@@ -20,10 +20,10 @@
       "description": "The bevoled One Dark Atom theme brought to Discord",
       "href": "https://github.com/Frostplexx/discord-one-dark"
     },
-{
+        {
       "name": "Playgound",
       "description": "A playground for testing things",
-      "href": "https://dinama.dev/playground/playground.html"
+      "href": "./playground/playground.html"
     }
   ]
 }
