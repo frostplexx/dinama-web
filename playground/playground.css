@@ -1,4 +1,4 @@
-:root{
+:root {
     --background-color: #24273a;
     --accent-color: #8aadf4;
     --accent-green: #a6da95;
@@ -7,32 +7,85 @@
     --text-primary: #cad3f5;
     --text-subtext: #b8c0e0;
 }
+
 body {
     background-color: var(--background-color) !important;
 }
 
-h1 {
-    color: var(--text-primary);
-    font-family: "JetBrainsMono";
-    font-size: 5rem !important;
-}
-.highlighted {
-    color: var(--accent-green);
-}
-
-a {
-    color: var(--text-subtext) !important;
-    font-family: "JetBrainsMono" !important;
-    text-decoration: none !important;
-}
-
-a:hover {
-    text-decoration: underline !important;
-}
-
 @font-face {
     font-family: 'JetbrainsMono';
-    src: url('/assets/font/JetBrainsMono-Medium.ttf') format('truetype');
+    src: url('/assets/font/JetBrainsMonoNerdFont-Medium.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+}
+
+
+#finder-sidebar {
+    background-color: var(--window-color);
+    border-right: 1px solid var(--window-border-color);
+    height: 100vh;
+    width: 10vw;
+    padding: -10px;
+    margin: -10px;
+}
+
+
+.sidebar-elment:hover {
+    background-color: var(--window-border-color);
+    cursor: pointer;
+}
+
+
+.active {
+    background-color: var(--accent-color) !important;
+    color: var(--background-color) !important;
+}
+
+.sidebar-elment {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    padding: 3px 3px 3px 10px;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.stuff-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.sidebar-elment div {
+    margin-left: 15px;
+}
+
+#apps-grid {
+    padding: 10px 10px 10px 30px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 4px;
+    overflow: hidden;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100px;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+}
+
+.app img {
+    height: 50px;
+    width: 50px;
 }
