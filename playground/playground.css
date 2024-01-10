@@ -21,6 +21,9 @@ body {
 
 
 #finder-sidebar {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 40px;
     background-color: var(--window-color);
     border-right: 1px solid var(--window-border-color);
     height: 100vh;
@@ -61,17 +64,14 @@ body {
 }
 
 .sidebar-elment div {
+    display: none;
     margin-left: 15px;
 }
 
 #apps-grid {
     padding: 10px 10px 10px 30px;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-column-gap: 5px;
-    grid-row-gap: 4px;
-    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .app {
@@ -88,4 +88,10 @@ body {
 .app img {
     height: 50px;
     width: 50px;
+}
+
+@media screen and (min-width: 900px) {
+    .sidebar-elment div {
+        display: block;
+    }
 }
