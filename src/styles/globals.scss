@@ -5,32 +5,22 @@ html {
   overflow: hidden;
   margin: 0;
   min-height: 100%;
-  color: color(display-p3 0.93 0.8231 0.9887);
+  color: rgb(202, 211, 245);
   background: #252335;
-  background: radial-gradient(
-    42.72% 43.43% at 50% 14.56%,
-    #2b2841 0%,
-    #252336 100%,
-    #252336 100%
-  );
-  background: radial-gradient(
-    42.72% 43.43% at 50% 14.56%,
-    color(display-p3 0.1667 0.1565 0.2482) 0%,
-    color(display-p3 0.1451 0.1373 0.2078) 100%,
-    color(display-p3 0.1451 0.1373 0.2078) 100%
-  );
+  background: radial-gradient(42.72% 43.43% at 50% 14.56%,
+      #24273a 0%,
+      #1e2030 100%,
+      #181926 100%);
+  background: radial-gradient(42.72% 43.43% at 50% 14.56%,
+      #24273a 0%,
+      #24273a 50%,
+      #1e2030 100%);
   user-select: none;
 }
 
 .selectable {
   user-select: text;
 }
-
-// img {
-//   -webkit-user-drag: none;
-//   -moz-user-drag: none;
-//   -o-user-drag: none;
-// }
 
 *,
 *::before,
@@ -39,10 +29,6 @@ html {
   box-sizing: border-box;
   // text-decoration: none;
 }
-
-// a {
-//   color: inherit;
-// }
 
 .rain {
   background-image: url('/rain.gif');
@@ -78,12 +64,15 @@ html {
     &.top {
       align-items: flex-start;
     }
+
     &.bottom {
       align-items: flex-end;
     }
+
     &.left {
       justify-content: flex-start;
     }
+
     &.right {
       justify-content: flex-end;
     }
@@ -95,12 +84,15 @@ html {
     &.top {
       justify-content: flex-start;
     }
+
     &.bottom {
       justify-content: flex-end;
     }
+
     &.left {
       align-items: flex-start;
     }
+
     &.right {
       align-items: flex-end;
     }
@@ -109,9 +101,11 @@ html {
   &.around {
     justify-content: space-around;
   }
+
   &.between {
     justify-content: space-between;
   }
+
   &.stretch {
     align-items: stretch;
   }
@@ -121,7 +115,7 @@ html {
   }
 
   &.children-fills {
-    & > * {
+    &>* {
       flex: 1;
     }
   }
