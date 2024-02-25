@@ -1,0 +1,204 @@
+:root {
+  --background-color: #24273a;
+  --accent-color: #8aadf4;
+  --accent-green: #a6da95;
+  --window-color: #363a4f;
+  --window-border-color: #494d64;
+  --text-primary: #cad3f5;
+  --text-subtext: #b8c0e0;
+}
+
+#hero {
+  padding: 0;
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: lighter;
+}
+
+#hero h1::after {
+  content: "";
+  margin: 0 0 0 -20px;
+  width: 10px;
+  height: 35px;
+  background: white;
+  display: inline-block;
+  animation: blink 1.25s steps(2) infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100svh;
+  width: 100svw;
+  padding: 0 0 2.5rem;
+  margin: 0;
+  overflow: hidden;
+}
+
+#terminal-window {
+  /*background: var(--window-color);*/
+  /*background: var(--arc-background-simple-color);*/
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  border: var(--window-border-color) solid 2px;
+  /* make it fill out as much space as possible but it shouldn't completely touch the sides */
+  width: 90%;
+  height: 90%;
+  max-width: 90%;
+  max-height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#terminal-status-bar {
+  background: var(--window-border-color);
+  height: 20px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+
+#close-button {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: #ff5f56;
+  border: 1px solid #bf4741;
+  margin-right: 10px;
+}
+
+#minimize-button {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  border: 1px solid #c08e23;
+  background: #ffbd2e;
+  margin-right: 10px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+#minus {
+  background: brown;
+  opacity: 0.6;
+  width: 75%;
+  height: 1.5px;
+  position: relative;
+  display: none;
+}
+
+#minimize-button:hover #minus {
+  display: block;
+}
+
+#minimize-button:hover {
+  opacity: 0.7;
+  /* height: 12px; */
+  /* width: 12px; */
+}
+
+#maximize-button {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  border: 1px solid #1a872a;
+  background: #27c93f;
+  margin-right: 10px;
+}
+
+#terminal-body {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 1.6em;
+  color: var(--arc-palette-subtitle, var(--text-primary));
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 1.6em;
+  color: var(--arc-palette-subtitle, var(--text-primary));
+}
+
+#terminal-body p {
+  margin: 0;
+}
+
+.location {
+  color: var(--arc-palette-maxContrastColor, var(--accent-green)) !important;
+}
+
+.location2 {
+  color: var(--arc-palette-foregroundPrimary, var(--accent-color)) !important;
+}
+
+.project a {
+  text-decoration: none;
+  color: var(--background-color);
+}
+
+.project {
+  background: var(--arc-palette-foregroundPrimary, var(--accent-color)) !important;
+  margin-bottom: 0.2rem;
+  padding: 0.2rem;
+}
+
+.project:hover a {
+  text-decoration: underline;
+}
+
+p {
+  padding: 0.2rem;
+}
+
+.subtext {
+  color: var(--text-subtext);
+}
+
+#socials a {
+  color: var(--arc-palette-foregroundPrimary, var(--accent-color));
+}
+
+#socials a:hover {
+  text-decoration: underline;
+  opacity: 0.7;
+}
+
+.spacer {
+  height: 0.75rem;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#footer > a {
+  padding: 5px;
+  color: var(--accent-color);
+  text-decoration: none;
+  opacity: 0.5;
+}
