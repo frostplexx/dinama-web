@@ -84,21 +84,6 @@ export const globalCommandsArray: Command[] = [
             }
         }
     },
-    {
-        //This is just a dummy command because clearing is handled in the frontend
-        commandName: "clear",
-        possibleArguments: [],
-        execute: (system: FakeUnix, args: any | null) => { }
-    },
-
-    {
-
-        commandName: "cat",
-        possibleArguments: [],
-        execute: (system: FakeUnix, args: any | null) => {
-
-        },
-    }
 
 ]
 

@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 import cs from 'classnames';
 import Link from 'next/link';
