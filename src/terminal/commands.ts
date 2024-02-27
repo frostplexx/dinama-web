@@ -1,4 +1,4 @@
-import { Command } from "./command-prompt";
+import { Command, CommmandResponse } from "./command-prompt";
 import { FakeUnix } from "./fakeunix";
 
 export const globalCommandsArray: Command[] = [
@@ -7,7 +7,10 @@ export const globalCommandsArray: Command[] = [
         possibleArguments: [],
         execute: (system: FakeUnix, args: any | null) => {
             const dirs = argsToAbsolutePath(args, system)
-            return system.getFileSystem().getContentOfPath(dirs).join(" ");
+            return {
+                result: system.getFileSystem().getContentOfPath(dirs).join(" "),
+                position: system.getFileSystem().getCurrentDirectory().join("/"),
+            } as CommmandResponse
         }
     },
     {
@@ -17,38 +20,51 @@ export const globalCommandsArray: Command[] = [
             const dirs = argsToAbsolutePath(args, system)
             const dir = system.getFileSystem().getDirectoryFromArray(dirs)
             system.getFileSystem().setCurrentDirectory(dir)
-            return dirs.join("/")
+            return {
+                result: null,
+                position: dirs.join("/")
+            }
         }
     },
     {
         commandName: "whoami",
         possibleArguments: [],
         execute: (system: FakeUnix, args: any | null) => {
-            return system.getCurrentUser();
+            return {
+                result: system.getCurrentUser(),
+                position: system.getFileSystem().getCurrentDirectory().join("/")
+            }
         }
     },
     {
         commandName: "pwd",
         possibleArguments: [],
         execute: (system: FakeUnix, args: any | null) => {
-            return "/" + system
-                .getFileSystem()
-                .getCurrentDirectory()
-                .join("/")
+            const path = system.getFileSystem().getCurrentDirectory().join("/")
+            return {
+                result: "/" + path,
+                position: path
+            }
         }
     },
     {
         commandName: "echo",
         possibleArguments: [],
         execute: (system: FakeUnix, args: any | null) => {
-            return args.join(" ")
+            return {
+                result: args.join(" "),
+                position: system.getFileSystem().getCurrentDirectory().join("/")
+            }
         }
     },
     {
         commandName: "date",
         possibleArguments: [],
         execute: (system: FakeUnix, args: any | null) => {
-            return new Date().toISOString().slice(0, -5)
+            return {
+                result: new Date().toISOString().slice(0, -5),
+                position: system.getFileSystem().getCurrentDirectory().join("/")
+            }
         }
     },
 
@@ -62,8 +78,26 @@ export const globalCommandsArray: Command[] = [
                 commands += key + " "
             })
 
-            return commands.split(" ").sort().join(" ").trim()
+            return {
+                result: commands.split(" ").sort().join(" ").trim(),
+                position: system.getFileSystem().getCurrentDirectory().join("/")
+            }
         }
+    },
+    {
+        //This is just a dummy command because clearing is handled in the frontend
+        commandName: "clear",
+        possibleArguments: [],
+        execute: (system: FakeUnix, args: any | null) => { }
+    },
+
+    {
+
+        commandName: "cat",
+        possibleArguments: [],
+        execute: (system: FakeUnix, args: any | null) => {
+
+        },
     }
 
 ]

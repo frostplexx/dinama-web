@@ -183,6 +183,7 @@ p {
 }
 
 
+
 .terminalInput {
   border: none;
   background: none;
@@ -194,5 +195,10 @@ p {
   font-family: var(--font-mono);
   font-size: 1.5rem;
   width: 70vw;
+  /* Make input take the full width of its parent */
+  max-width: 70vw;
+  /* Ensure it doesn't exceed the width of its parent */
+  flex: 1;
+  /* Allows the input to grow and shrink as needed */
   caret-shape: block;
 }
