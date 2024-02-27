@@ -1,16 +1,10 @@
-import Image from "next/image";
-
-import HomeView from "../components/HomeView";
+import Terminal from "../components/Terminal";
 import Window from "../components/Window";
-
-import styles from "./page.module.css";
 
 export default function Home() {
     return (
-        <div>
-            <Window title="Terminal" label="">
-                <HomeView />
-            </Window>
-        </div>
+        <Window title="Terminal" label="">
+            <Terminal />
+        </Window>
     );
 }

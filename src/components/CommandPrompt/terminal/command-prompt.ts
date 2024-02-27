@@ -4,21 +4,29 @@ import { FakeDirectory, FakeFileSystem } from "./filesystem";
 
 export const fakeUnix = FakeUnix.Instance("daniel", loadDefaultFilesystem())
 
+interface ParseResponse {
+    response: string;
+    location: string;
+}
 
-export function parseCommand(commandString: string) {
+export function parseCommand(commandString: string): ParseResponse {
     let tokens = commandString.split(" ");
     let commandName = tokens[0];
     let args = tokens.slice(1); // Capture any arguments passed to the command
 
-    console.log(commandName)
     const command = fakeUnix.getCommands().get(commandName)
+    var commandResponse = ""
     if (command) {
-        console.log(command.execute(fakeUnix, args))
+        commandResponse = command.execute(fakeUnix, args)
+        // console.log(command.execute(fakeUnix, args))
     } else {
         console.log("command not found: " + commandName)
     }
-
-
+    console.log(fakeUnix.getFileSystem().getCurrentDirectory().join("/"))
+    return {
+        response: commandResponse,
+        location: fakeUnix.getFileSystem().getCurrentDirectory().join("/")
+    }
 }
 
 function loadDefaultFilesystem(): FakeFileSystem {
@@ -46,6 +54,6 @@ function loadDefaultFilesystem(): FakeFileSystem {
 export interface Command {
     commandName: string;
     possibleArguments: string[];
-    execute: (system: FakeUnix, args: any | null) => {};
+    execute: (system: FakeUnix, args: any | null) => string;
 }
 
