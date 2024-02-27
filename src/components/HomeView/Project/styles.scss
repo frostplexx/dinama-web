@@ -1,0 +1,14 @@
+.project a {
+  text-decoration: none;
+  color: var(--background-color);
+}
+
+.project {
+  background: var(--arc-palette-foregroundPrimary, var(--accent-color)) !important;
+  margin-bottom: 0.2rem;
+  padding: 0.2rem;
+}
+
+.project:hover a {
+  text-decoration: underline;
+}

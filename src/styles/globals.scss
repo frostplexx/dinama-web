@@ -42,8 +42,8 @@ html {
   margin: 0;
   height: 100%;
   width: 100%;
-  opacity: 0.175;
-  z-index: 10;
+  opacity: 0.5;
+  z-index: -1;
   transform: scaleX(-1);
   pointer-events: none;
   image-rendering: pixelated;

@@ -1,6 +1,6 @@
 import localFont from 'next/font/local';
 
-import '~/styles/globals.scss';
+import '../styles/globals.scss';
 // import * as s from './styles.module.scss';
 
 const jetBrains = localFont({
