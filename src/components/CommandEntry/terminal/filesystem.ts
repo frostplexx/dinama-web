@@ -53,8 +53,9 @@ export class FakeFileSystem {
         let dir = this.getDirectoryFromArray(path);
         if (!dir) return [];
 
+        // Assuming dir.filesMap exists and maps string keys to FakeFile objects
         let contentNames = Array.from(dir.children.keys()).map(name => name + "/");
-        contentNames.push(...dir.filesMap.keys(file => file.name));
+        contentNames.push(...Array.from(dir.filesMap.values()).map(file => file.name));
         return contentNames;
     }
 
