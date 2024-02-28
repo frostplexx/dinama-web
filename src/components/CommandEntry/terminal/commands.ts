@@ -99,6 +99,21 @@ export const globalCommandsArray: Command[] = [
                 return "could not find file on system"
             }
         }
+    },
+    {
+        commandName: "cat",
+        possibleArguments: [],
+        execute: (system: FakeUnix, args: any | null) => {
+            const path = argsToAbsolutePath(args, system)
+            const lastEl = path.pop()
+            const dir = system.getFileSystem().getDirectoryFromArray(path)
+            try {
+                const file = dir.filesMap.get(lastEl)
+                return file.content
+            } catch {
+                return "could not find file on system"
+            }
+        }
     }
 >>>>>>>> refactor:src/components/CommandEntry/terminal/commands.ts
 
