@@ -1,12 +1,13 @@
-// @ts-nocheck
-'use client';
-import cs from 'classnames';
-import Link from 'next/link';
+'use server';
+// import { useRef } from 'react';
+import { Suspense } from "react";
+import cs from "classnames";
+import Link from "next/link";
 
-import TrafficLights from './TrafficLights';
-import * as s from './styles.module.scss';
+import TrafficLights from "./TrafficLights";
+import * as s from "./styles.module.scss";
 
-export default function Window({ title, label, children }) {
+export default async function Window({ title, label, children }) {
     return (
         <div className={s.wrapper}>
             <Link href="/">
@@ -18,7 +19,7 @@ export default function Window({ title, label, children }) {
                 <div className={s.border} />
 
                 <div className={s.titleBarWrapper}>
-                    <div className={cs(s.titleBar, 'flex between')}>
+                    <div className={cs(s.titleBar, "flex between")}>
                         <div className="flex left gap16">
                             <TrafficLights />
                             <div className="shadow16">{title}</div>
