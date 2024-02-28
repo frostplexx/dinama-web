@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, SetStateAction } from "react";
 import AutosizeInput from "react-input-autosize";
 
 import CommandEntry, { CommandEntryProps } from "./CommandEntry";
@@ -9,7 +9,7 @@ import "./styles.scss";
 export default function CommandPrompt() {
     const [log, setLog] = useState<CommandEntryProps[]>([]);
     const [command, setCommand] = useState("");
-    const [currentLocation, setCurrentLocation] = useState("");
+    const [currentLocation, setCurrentLocation] = useState("~");
     const inputRef = useRef<HTMLInputElement>(null);
     const dumbBottomRef = useRef(null);
 
@@ -25,6 +25,14 @@ export default function CommandPrompt() {
 
     const handleFormSubmit = (e: any) => {
         e.preventDefault();
+
+        //Handle clear command separately
+        if (command == "clear") {
+            setCommand("")
+            setLog([])
+            return
+        }
+
         const { response, location: newLocation } = parseCommand(command);
         const newCommandEntry = {
             children: command,
@@ -35,6 +43,7 @@ export default function CommandPrompt() {
         setCurrentLocation(newLocation);
         setCommand("");
     };
+
 
     // Use useEffect to focus the input element after the component mounts
     useEffect(focusOnInput, []); // The empty array ensures this effect runs only once after the initial render
@@ -53,7 +62,7 @@ export default function CommandPrompt() {
                             type="text"
                             value={command}
                             onBlur={focusOnInput}
-                            onChange={(e) => setCommand(e.target.value)}
+                            onChange={(e: { target: { value: SetStateAction<string>; }; }) => setCommand(e.target.value)}
                         />
                     </div>
                 </CommandEntry>

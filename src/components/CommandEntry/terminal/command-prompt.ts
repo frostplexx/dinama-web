@@ -48,7 +48,7 @@ function loadDefaultFilesystem(): FakeFileSystem {
     var bin = new FakeDirectory("bin")
 
 
-    return new FakeFileSystem([dev, home, media, opt, root, sys, usr, etc, lib, mnt, proc, run, tmp, var_dir, bin])
+    return new FakeFileSystem([dev, home, media, opt, root, sys, usr, etc, lib, mnt, proc, run, tmp, var_dir, bin], "daniel")
 }
 
 export interface Command {

@@ -1,8 +1,7 @@
 import { Suspense } from "react";
 
-import CommandPrompt from "../CommandPrompt";
-import CommandEntry from "../CommandPrompt/CommandEntry";
-import Window from "../Window";
+import CommandPrompt from "../CommandEntry";
+import CommandEntry from "../CommandEntry/CommandEntry";
 
 import Project from "./Project";
 import "./styles.scss";
@@ -10,13 +9,14 @@ import "./styles.scss";
 export default async function Terminal() {
     return (
         <div id="terminal-body" className="selectable">
+            <CommandEntry location={"~"}>cat hello.txt</CommandEntry>
             <p className="subtext">
                 Hello there! Welcome to my website where I showcase some of my projects and fun
                 ideas. Browse through the files to discover more about my work. If you have any
                 questions or just want to chat, feel free to reach out. Enjoy your time here!
             </p>
             <div className="spacer"></div>
-            <CommandEntry location={""}>cd projects/ && ls.</CommandEntry>
+            <CommandEntry location={"~"}>cd projects/ && ls.</CommandEntry>
             <div id="projects">
                 <Project
                     name={"Winston"}
@@ -43,12 +43,12 @@ export default async function Terminal() {
                 <Project
                     name={"Playground"}
                     description={"A playground for testing things"}
-                    href={"./playgroung/playground.html"}
+                    href={"https://playground.dinama.dev"}
                 />
             </div>
             <div className="spacer"></div>
-            <CommandEntry location={"/projects"}>cd ..</CommandEntry>
-            <CommandEntry location={""}>cd socials/ && ls</CommandEntry>
+            <CommandEntry location={"~/projects"}>cd ..</CommandEntry>
+            <CommandEntry location={"~"}>cd socials/ && ls</CommandEntry>
             <div className="socials">
                 <a href="https://github.com/Frostplexx">GitHub</a>
                 <a href="mailto:me@dinama.dev">me@dinama.dev</a>

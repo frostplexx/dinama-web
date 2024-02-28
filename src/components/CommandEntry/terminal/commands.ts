@@ -51,7 +51,6 @@ export const globalCommandsArray: Command[] = [
             return new Date().toISOString().slice(0, -5)
         }
     },
-
     {
         commandName: "help",
         possibleArguments: [],
@@ -64,6 +63,21 @@ export const globalCommandsArray: Command[] = [
 
             return commands.split(" ").sort().join(" ").trim()
         }
+    },
+    {
+        commandName: "cat",
+        possibleArguments: [],
+        execute: (system: FakeUnix, args: any | null) => {
+            const path = argsToAbsolutePath(args, system)
+            const lastEl = path.pop()
+            const dir = system.getFileSystem().getDirectoryFromArray(path)
+            try {
+                const file = dir.filesMap.get(lastEl)
+                return file.content
+            } catch {
+                return "could not find file on system"
+            }
+        }
     }
 
 ]
@@ -75,6 +89,11 @@ function argsToAbsolutePath(args: any | null, system: FakeUnix): string[] {
     if (args[0]) {
         let dirs = (args[0].split("/") as string[]);
         let start = dirs.shift();
+
+        if (dirs.length == 0) {
+            currentdir.push(args[0] as string)
+            return currentdir
+        }
 
         //check of . and ..
         if (start == ".") {
