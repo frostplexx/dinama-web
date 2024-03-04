@@ -1,0 +1,60 @@
+.location {
+  color: var(--arc-palette-maxContrastColor, var(--accent-green)) !important;
+}
+
+.location2 {
+  color: var(--arc-palette-foregroundPrimary, var(--accent-color)) !important;
+}
+
+.terminalInputForm {
+  width: 100%;
+}
+
+.terminalInput {
+  cursor: text;
+  width: 100%;
+
+  input {
+    border: none;
+    background: none;
+    caret-color: var(--text-primary);
+    padding: 0;
+    margin: 0;
+    outline: none;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    caret-color: transparent;
+  }
+
+  // Fake block cared
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 1.75rem;
+    background-color: var(--text-primary);
+    animation: blinkFast 1s infinite;
+    position: relative;
+    bottom: -3px;
+    pointer-events: none;
+  }
+}
+
+@keyframes blinkFast {
+  0% {
+    opacity: 1;
+  }
+
+  1% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  51% {
+    opacity: 1;
+  }
+}
