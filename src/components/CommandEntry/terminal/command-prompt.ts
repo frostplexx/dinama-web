@@ -18,11 +18,10 @@ export function parseCommand(commandString: string): ParseResponse {
     var commandResponse = ""
     if (command) {
         commandResponse = command.execute(fakeUnix, args)
-        // console.log(command.execute(fakeUnix, args))
     } else {
-        console.log("command not found: " + commandName)
+        commandResponse = "command not found: " + commandName
     }
-    console.log(fakeUnix.getFileSystem().getCurrentDirectory().join("/"))
+
     return {
         response: commandResponse,
         location: fakeUnix.getFileSystem().getCurrentDirectory().join("/")

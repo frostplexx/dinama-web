@@ -7,7 +7,6 @@ export interface CommandEntryProps {
 export default function CommandEntry({ children, location, result }: CommandEntryProps) {
 
     function parseLocation(currentLocation: string): string {
-        console.log("location: " + currentLocation)
         if (currentLocation == "" || !currentLocation) {
             return "/"
         } else {

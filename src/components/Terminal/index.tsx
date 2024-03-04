@@ -2,9 +2,14 @@ import { Suspense, useEffect, useState } from "react";
 import CommandPrompt from "../CommandEntry";
 import CommandEntry from "../CommandEntry/CommandEntry";
 
+import { ApolloClient, createHttpLink, InMemoryCache, gql } from "@apollo/client";
+import { setContext } from '@apollo/client/link/context';
 import "./styles.scss";
+import Project from "./Project";
 
 export default async function Terminal() {
+
+    const data = await getData()
 
     return (
         <div id="terminal-body" className="selectable">
@@ -17,6 +22,10 @@ export default async function Terminal() {
             <div className="spacer"></div>
             <CommandEntry location={"~"}>cd projects/ && ls.</CommandEntry>
             <div id="projects">
+                {data.map((item, _) => (
+                    <Project key={item.id} name={item.name} description={item.description} href={item.url} />
+                ))}
+                <Project name={"Playground"} description={"My space for playing around with web stuff"} href={"https://playground.dinama.dev"} />
             </div>
             <div className="spacer"></div>
             <CommandEntry location={"~/projects"}>cd ..</CommandEntry>
@@ -33,4 +42,52 @@ export default async function Terminal() {
     );
 }
 
+export async function getData() {
+    const httpLink = createHttpLink({
+        uri: 'https://api.github.com/graphql',
+    });
 
+    const authLink = setContext((_, { headers }) => {
+        return {
+            headers: {
+                ...headers,
+                authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
+            }
+        }
+    });
+
+    const client = new ApolloClient({
+        link: authLink.concat(httpLink),
+        cache: new InMemoryCache()
+    });
+
+
+    const { data } = await client.query({
+        query: gql`
+    {
+      user(login: "frostplexx") {
+        pinnedItems(first: 6) {
+          totalCount
+          edges {
+            node {
+              ... on Repository {
+                name
+                id
+                url
+                description
+                stargazers {
+                  totalCount
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `
+    });
+
+    const { user } = data;
+    const pinnedItems = user.pinnedItems.edges.map(edge => edge.node);
+    return pinnedItems;
+}

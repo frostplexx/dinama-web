@@ -45,7 +45,6 @@ export class FakeFileSystem {
         // Check if the path is "/" and return all root directory names
         if (path.length === 1 && path[0] === '') {
             const tmp = Array.from(this.directories.keys()).map(name => name + "/");
-            console.log(this.directories)
             return tmp
         }
 
