@@ -41,4 +41,11 @@ export class FakeUnix {
         return this.currentUser
     }
 
+
+    public saveState() {
+    }
+
+    public loadState() {
+        return this
+    }
 }

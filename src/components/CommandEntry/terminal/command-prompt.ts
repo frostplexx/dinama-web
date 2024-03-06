@@ -2,7 +2,7 @@ import { FakeUnix } from "./fakeunix";
 import { FakeDirectory, FakeFileSystem } from "./filesystem";
 
 
-export const fakeUnix = FakeUnix.Instance("daniel", loadDefaultFilesystem())
+export const fakeUnix = FakeUnix.Instance("daniel", loadDefaultFilesystem()).loadState()
 
 interface ParseResponse {
     response: string;

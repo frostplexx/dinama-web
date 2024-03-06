@@ -25,7 +25,7 @@ export default function CommandEntry({ children, location, result }: CommandEntr
                 </div>
                 <div className="fill">{children}</div>
             </div>
-            {!!result && <div>{result}</div>}
+            {!!result && <div className="preseveNewLines">{result}</div>}
         </>
     );
 }

@@ -21,6 +21,8 @@ export class FakeFileSystem {
         this.currentDirectory = userdir;
     }
 
+
+
     getDirectoryFromArray(path: string[]): FakeDirectory | null {
         if (path.length === 0) return this.currentDirectory;
         let currentDir: FakeDirectory | null = null;
@@ -96,6 +98,35 @@ export class FakeDirectory {
     appendChild(child: FakeDirectory) {
         child.parentDirectory = this;
         this.children.set(child.name, child);
+    }
+
+
+    addDirectory(name: string) {
+        let newDir = new FakeDirectory(name);
+        this.children.set(name, newDir);
+        newDir.parentDirectory = this;
+        return newDir;
+    }
+
+    removeDirectory(name: string) {
+        this.children.delete(name);
+    }
+
+
+    removeFile(name: string) {
+        this.filesMap.delete(name);
+    }
+
+    getDirectory(name: string): FakeDirectory | null {
+        return this.children.get(name) || null;
+    }
+
+    getFile(name: string): FakeFile | null {
+        return this.filesMap.get(name) || null;
+    }
+
+    addFile(name: string, content: string) {
+        this.filesMap.set(name, new FakeFile(name, content));
     }
 
 }

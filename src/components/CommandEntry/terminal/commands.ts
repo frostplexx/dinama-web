@@ -13,12 +13,62 @@ export const globalCommandsArray: Command[] = [
         }
     },
     {
+        commandName: "mkdir",
+        possibleArguments: [],
+        execute: (system: FakeUnix, args: any | null) => {
+            const dirs = argsToAbsolutePath(args, system)
+            console.log(dirs)
+            const newfolder = dirs.pop()
+            const dir = system.getFileSystem().getDirectoryFromArray(dirs)
+            dir.addDirectory(newfolder as string)
+            system.saveState()
+            return ""
+        }
+    },
+    {
+        commandName: "touch",
+        possibleArguments: [],
+        execute: (system: FakeUnix, args: any | null) => {
+            const dirs = argsToAbsolutePath(args, system)
+            const newfile = dirs.pop()
+            const dir = system.getFileSystem().getDirectoryFromArray(dirs)
+            dir.addFile(newfile as string, "")
+            system.saveState()
+            return ""
+        }
+    },
+    {
+        commandName: "rm",
+        possibleArguments: [],
+        execute: (system: FakeUnix, args: any | null) => {
+            const dirs = argsToAbsolutePath(args, system)
+            const lastEl = dirs.pop()
+            const dir = system.getFileSystem().getDirectoryFromArray(dirs)
+            dir.removeFile(lastEl as string)
+            system.saveState()
+            return ""
+        }
+    },
+    {
+        commandName: "rmdir",
+        possibleArguments: [],
+        execute: (system: FakeUnix, args: any | null) => {
+            const dirs = argsToAbsolutePath(args, system)
+            const lastEl = dirs.pop()
+            const dir = system.getFileSystem().getDirectoryFromArray(dirs)
+            dir.removeDirectory(lastEl as string)
+            system.saveState()
+            return ""
+        }
+    },
+    {
         commandName: "cd",
         possibleArguments: [],
         execute: (system: FakeUnix, args: any | null) => {
             const dirs = argsToAbsolutePath(args, system)
             const dir = system.getFileSystem().getDirectoryFromArray(dirs)
             system.getFileSystem().setCurrentDirectory(dir)
+            system.saveState()
             return dirs.join("/")
         }
     },
@@ -80,12 +130,12 @@ export const globalCommandsArray: Command[] = [
                 return "could not find file on system"
             }
         }
-    }, {
+    },
+    {
         commandName: "neofetch",
         possibleArguments: [],
         execute: (system: FakeUnix, args: any | null) => {
-            return `
-daniel@portfolio
+            return `daniel@portfolio
 ---------------
 OS: ${os.type()}
 Host: ${os.hostname()}
@@ -94,8 +144,7 @@ CPU: ${os.cpus()[0] == undefined ? "Intel 8086" : os.cpus()[0].model}
 `
 
         }
-    }
-
+    },
 ]
 
 
@@ -112,33 +161,38 @@ function secondsToString(seconds) {
 
 
 function argsToAbsolutePath(args: any | null, system: FakeUnix): string[] {
-    const currentdir = system.getFileSystem().getCurrentDirectory();
-    if (args[0]) {
-        let dirs = (args[0].split("/") as string[]);
-        let start = dirs.shift();
+    try {
 
-        if (dirs.length == 0) {
-            currentdir.push(args[0] as string)
-            return currentdir
-        }
+        const currentdir = system.getFileSystem().getCurrentDirectory();
+        if (args[0]) {
+            let dirs = (args[0].split("/") as string[]);
+            let start = dirs.shift();
 
-        //check of . and ..
-        if (start == ".") {
-            dirs = currentdir.concat(dirs)
-        } else if (start == "..") {
-            currentdir.pop()
-
-            //Edgecase for ../ where it would be ["dir", ""]
-            if (dirs[0]) {
-                dirs = currentdir.concat(dirs)
-            } else {
-                dirs = currentdir
+            if (dirs.length == 0) {
+                currentdir.push(args[0] as string)
+                return currentdir
             }
+
+            //check of . and ..
+            if (start == ".") {
+                dirs = currentdir.concat(dirs)
+            } else if (start == "..") {
+                currentdir.pop()
+
+                //Edgecase for ../ where it would be ["dir", ""]
+                if (dirs[0]) {
+                    dirs = currentdir.concat(dirs)
+                } else {
+                    dirs = currentdir
+                }
+            }
+
+            return dirs
         }
 
-        return dirs
+        return currentdir
+    } catch {
+        return []
     }
-
-    return currentdir
 
 }
