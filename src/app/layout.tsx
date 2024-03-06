@@ -1,4 +1,5 @@
 import localFont from 'next/font/local';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import '../styles/globals.scss';
 // import * as s from './styles.module.scss';
@@ -38,6 +39,7 @@ export default function SiteLayout({
 }) {
     return (
         <html lang="en">
+            <SpeedInsights />
             <head>
                 <link rel="icon" href="/favicon.ico" sizes="any" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
