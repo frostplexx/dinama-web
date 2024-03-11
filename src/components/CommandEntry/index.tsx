@@ -11,11 +11,11 @@ export default function CommandPrompt() {
     const [command, setCommand] = useState("");
     const [currentLocation, setCurrentLocation] = useState("~");
     const inputRef = useRef<HTMLInputElement>(null);
-    const dumbBottomRef = useRef(null);
+    const dummyBottomRef = useRef(null);
 
     function scrollDown() {
-        if (dumbBottomRef.current) {
-            dumbBottomRef.current.scrollIntoView({ behavior: "smooth" });
+        if (dummyBottomRef.current) {
+            (dummyBottomRef.current as any).scrollIntoView({ behavior: "smooth" });
         }
     }
 
@@ -58,7 +58,7 @@ export default function CommandPrompt() {
                 <CommandEntry location={currentLocation}>
                     <div className="terminalInput" onClick={focusOnInput}>
                         <AutosizeInput
-                            ref={inputRef}
+                            ref={inputRef as any}
                             type="text"
                             value={command}
                             onBlur={focusOnInput}
@@ -67,7 +67,7 @@ export default function CommandPrompt() {
                     </div>
                 </CommandEntry>
             </form>
-            <div ref={dumbBottomRef} style={{ display: "block", width: "100%", height: "1px" }} />
+            <div ref={dummyBottomRef} style={{ display: "block", width: "100%", height: "1px" }} />
         </>
     );
 }

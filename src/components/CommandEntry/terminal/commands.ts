@@ -20,8 +20,10 @@ export const globalCommandsArray: Command[] = [
             console.log(dirs)
             const newfolder = dirs.pop()
             const dir = system.getFileSystem().getDirectoryFromArray(dirs)
-            dir.addDirectory(newfolder as string)
-            system.saveState()
+            if (dir) {
+                dir.addDirectory(newfolder as string)
+                system.saveState()
+            }
             return ""
         }
     },
@@ -32,8 +34,10 @@ export const globalCommandsArray: Command[] = [
             const dirs = argsToAbsolutePath(args, system)
             const newfile = dirs.pop()
             const dir = system.getFileSystem().getDirectoryFromArray(dirs)
-            dir.addFile(newfile as string, "")
-            system.saveState()
+            if (dir) {
+                dir.addFile(newfile as string, "")
+                system.saveState()
+            }
             return ""
         }
     },
@@ -44,8 +48,10 @@ export const globalCommandsArray: Command[] = [
             const dirs = argsToAbsolutePath(args, system)
             const lastEl = dirs.pop()
             const dir = system.getFileSystem().getDirectoryFromArray(dirs)
-            dir.removeFile(lastEl as string)
-            system.saveState()
+            if (dir) {
+                dir.removeFile(lastEl as string)
+                system.saveState()
+            }
             return ""
         }
     },
@@ -56,8 +62,10 @@ export const globalCommandsArray: Command[] = [
             const dirs = argsToAbsolutePath(args, system)
             const lastEl = dirs.pop()
             const dir = system.getFileSystem().getDirectoryFromArray(dirs)
-            dir.removeDirectory(lastEl as string)
-            system.saveState()
+            if (dir) {
+                dir.removeDirectory(lastEl as string)
+                system.saveState()
+            }
             return ""
         }
     },
@@ -67,8 +75,10 @@ export const globalCommandsArray: Command[] = [
         execute: (system: FakeUnix, args: any | null) => {
             const dirs = argsToAbsolutePath(args, system)
             const dir = system.getFileSystem().getDirectoryFromArray(dirs)
-            system.getFileSystem().setCurrentDirectory(dir)
-            system.saveState()
+            if (dir) {
+                system.getFileSystem().setCurrentDirectory(dir)
+                system.saveState()
+            }
             return dirs.join("/")
         }
     },
@@ -124,8 +134,12 @@ export const globalCommandsArray: Command[] = [
             const lastEl = path.pop()
             const dir = system.getFileSystem().getDirectoryFromArray(path)
             try {
-                const file = dir.filesMap.get(lastEl)
-                return file.content
+                if (dir && lastEl) {
+                    const file = dir.filesMap.get(lastEl)
+                    if (file) return file.content
+                } else {
+                    return "could not find directory in system"
+                }
             } catch {
                 return "could not find file on system"
             }

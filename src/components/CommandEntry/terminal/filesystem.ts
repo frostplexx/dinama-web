@@ -8,7 +8,9 @@ export class FakeFileSystem {
 
         const homedir = this.directories.get("home")
         let userdir = new FakeDirectory(currentUser)
-        homedir.appendChild(userdir)
+        if (homedir) {
+            homedir.appendChild(userdir)
+        }
 
         // Initialize user directory and all the files that already exist in there
         userdir.appendFile(new FakeFile("hello.txt", " Hello there! Welcome to my website where I showcase some of my projects and fun ideas. Browse through the files to discover more about my work. If you have any questions or just want to chat, feel free to reach out. Enjoy your time here! "));
