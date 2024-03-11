@@ -56,8 +56,10 @@ export default function CommandPrompt() {
             ))}
             <form className="terminalInputForm" onSubmit={handleFormSubmit}>
                 <CommandEntry location={currentLocation}>
-                    <div className="terminalInput" onClick={focusOnInput}>
+                    <div className="terminalInput" onClick={focusOnInput} >
                         <AutosizeInput
+                            label="Command Prompt"
+                            aria-label="Command Prompt"
                             ref={inputRef as any}
                             type="text"
                             value={command}

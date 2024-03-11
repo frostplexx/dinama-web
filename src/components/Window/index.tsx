@@ -9,7 +9,7 @@ import * as s from "./styles.module.scss";
 export default async function Window({ title, label, children }) {
     return (
         <div className={s.wrapper}>
-            <Link href="/">
+            <Link href="/" aria-label="Home">
                 <div className={s.clickableBG} />
             </Link>
             <div className={s.window}>

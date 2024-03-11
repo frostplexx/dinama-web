@@ -31,8 +31,8 @@ export default async function Terminal() {
             <CommandEntry location={"~/projects"}>cd ..</CommandEntry>
             <CommandEntry location={"~"}>cd socials/ && ls</CommandEntry>
             <div className="socials">
-                <a href="https://github.com/Frostplexx">GitHub</a>
-                <a href="mailto:me@dinama.dev">me@dinama.dev</a>
+                <a href="https://github.com/Frostplexx" aria-label="GitHub Profile">GitHub</a>
+                <a href="mailto:me@dinama.dev" aria-label="Email Address">me@dinama.dev</a>
                 <span>Frostplexx.discord</span>
             </div>
             <Suspense fallback={null}>

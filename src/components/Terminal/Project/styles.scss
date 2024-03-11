@@ -9,17 +9,17 @@
 
 .project {
   background: var(--arc-palette-foregroundPrimary, var(--accent-color)) !important;
+  color: var(--arc-palette-backgroundPrimary, var(--background-color));
   margin-bottom: 0.2rem;
   padding: 0.2rem;
-  transition: all 200ms ease-out;
   text-wrap: nowrap;
-  text-overflow: ellipsis " [...]";
-  color: var(--arc-palette-backgroundPrimary, var(--background-color));
+  text-overflow: ellipsis " [...]" !important;
   overflow: hidden;
   white-space: nowrap;
 
-
   @media (min-width: 600px) {
+    transition: all 200ms ease-out;
+
     &:hover {
       box-shadow: 0px 0px 5px black;
       transform: scale(1.001);

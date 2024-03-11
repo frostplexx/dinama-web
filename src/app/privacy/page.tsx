@@ -129,7 +129,7 @@ export default function Privacy() {
                 changes. We will notify you of any changes by posting the new Privacy Policy on this page. These changes are
                 effective immediately, after they are posted on this page.</p>
 
-            <p>Our Privacy Policy was created with the help of the <a href="https://www.privacypolicygenerator.info">Privacy
+            <p>Our Privacy Policy was created with the help of the <a aria-label="Privacy Policy Generator" href="https://www.privacypolicygenerator.info">Privacy
                 Policy Generator</a>.</p>
 
             <h2>Contact Us</h2>
