@@ -1,6 +1,13 @@
 body,
 html {
   font-size: 1.15rem;
+
+
+  @media only screen and (max-device-width: 480px) {
+    font-size: 1rem;
+    overflow: hidden;
+  }
+
   max-width: 100vw;
   overflow: hidden;
   margin: 0;
@@ -8,13 +15,13 @@ html {
   color: rgb(202, 211, 245);
   background: #252335;
   background: radial-gradient(42.72% 43.43% at 50% 14.56%,
-      #24273a 0%,
-      #1e2030 100%,
-      #181926 100%);
+    #24273a 0%,
+    #1e2030 100%,
+    #181926 100%);
   background: radial-gradient(42.72% 43.43% at 50% 14.56%,
-      #24273a 0%,
-      #24273a 50%,
-      #1e2030 100%);
+    #24273a 0%,
+    #24273a 50%,
+    #1e2030 100%);
   user-select: none;
 }
 

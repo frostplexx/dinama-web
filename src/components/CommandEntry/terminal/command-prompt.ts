@@ -10,7 +10,7 @@ interface ParseResponse {
 }
 
 export function parseCommand(commandString: string): ParseResponse {
-    let tokens = commandString.split(" ");
+    let tokens = commandString.toLowerCase().trim().split(" ");
     let commandName = tokens[0];
     let args = tokens.slice(1); // Capture any arguments passed to the command
 

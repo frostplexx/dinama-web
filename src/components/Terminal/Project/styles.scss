@@ -13,16 +13,22 @@
   padding: 0.2rem;
   transition: all 200ms ease-out;
   text-wrap: nowrap;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis " [...]";
+  color: var(--arc-palette-backgroundPrimary, var(--background-color));
+  overflow: hidden;
+  white-space: nowrap;
 
-  &:hover {
-    box-shadow: 0px 0px 5px black;
-    transform: scale(1.001);
-    padding: 10px;
-    margin: -6.1px;
-    border-radius: 5px;
-    z-index: 10000;
 
+  @media (min-width: 600px) {
+    &:hover {
+      box-shadow: 0px 0px 5px black;
+      transform: scale(1.001);
+      padding: 10px;
+      margin: -6.1px;
+      border-radius: 5px;
+      z-index: 10000;
+    }
   }
+
 
 }
