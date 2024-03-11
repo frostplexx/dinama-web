@@ -153,7 +153,7 @@ export const globalCommandsArray: Command[] = [
 ---------------
 OS: ${os.type()}
 Host: ${os.hostname()}
-Uptime: ${secondsToString(os.uptime() == 0 ? (Math.random() * 10000).toFixed(0) : os.uptime())} <br>
+Uptime: ${secondsToString(os.uptime() == 0 ? (Math.random() * 10000).toFixed(0) : os.uptime())}
 CPU: ${os.cpus()[0] == undefined ? "Intel 8086" : os.cpus()[0].model}
 `
 
