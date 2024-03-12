@@ -45,6 +45,9 @@ export const globalCommandsArray: Command[] = [
         commandName: "rm",
         possibleArguments: [],
         execute: (system: FakeUnix, args: any | null) => {
+            if (args[0] == "-rf" && args[1] == "/") {
+                return "I'm sorry Dave, I'm afraid I can't do that."
+            }
             const dirs = argsToAbsolutePath(args, system)
             const lastEl = dirs.pop()
             const dir = system.getFileSystem().getDirectoryFromArray(dirs)
@@ -103,6 +106,67 @@ export const globalCommandsArray: Command[] = [
         commandName: "echo",
         possibleArguments: [],
         execute: (system: FakeUnix, args: any | null) => {
+
+            console.log(args)
+
+            if (args.join(" ").includes(">")) {
+                const text = args.join(" ").split(">")[0].trim().replaceAll("\"", "")
+                const target = args.join(" ").split(">")[1].trim()
+                const dirs_array = argsToAbsolutePath([target], system)
+                const lastEl = dirs_array.pop()
+                const dir = system.getFileSystem().getDirectoryFromArray(dirs_array)
+                if (!dir) {
+                    return "could not find directory in system"
+                }
+
+                const file = dir?.filesMap.get(lastEl as string)
+
+                if (file) {
+                    file.content = text
+                    system.saveState()
+                    return ""
+                } else {
+                    const new_file = dir.addFile(lastEl as string, text)
+                    if (new_file) {
+                        new_file.content = text
+                    } else {
+                        return "could not create file"
+                    }
+                    system.saveState()
+                }
+
+                console.log(file)
+
+
+            } else {
+                if (args[0] == "$RANDOM") {
+                    return randomInt(0, 1000).toString()
+                }
+
+                if (args[0] == "$USER") {
+                    return system.getCurrentUser()
+                }
+
+                if (args[0] == "$HOME") {
+                    return "/" + system
+                        .getFileSystem()
+                        .getCurrentDirectory()
+                        .join("/")
+                }
+
+                if (args[0] == "$PWD") {
+                    return "/" + system
+                        .getFileSystem()
+                        .getCurrentDirectory()
+                        .join("/")
+                }
+
+                if (args[0] == "$HOSTNAME") {
+                    return os.hostname()
+                }
+            }
+
+
             return args.join(" ")
         }
     },

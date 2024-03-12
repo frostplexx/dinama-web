@@ -97,6 +97,10 @@ export class FakeDirectory {
         this.filesMap.set(file.name, file);
     }
 
+    findFiles() {
+        return Array.from(this.filesMap.keys());
+    }
+
     appendChild(child: FakeDirectory) {
         child.parentDirectory = this;
         this.children.set(child.name, child);
@@ -129,6 +133,7 @@ export class FakeDirectory {
 
     addFile(name: string, content: string) {
         this.filesMap.set(name, new FakeFile(name, content));
+        return this.filesMap.get(name);
     }
 
 }
