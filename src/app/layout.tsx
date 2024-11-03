@@ -1,4 +1,5 @@
 import localFont from 'next/font/local';
+import { Analytics } from "@vercel/analytics/react"
 
 import '../styles/globals.scss';
 // import * as s from './styles.module.scss';
@@ -45,6 +46,7 @@ export default function SiteLayout({
             </head>
             <body className={jetBrains.className}>
                 <div className="rain" />
+                <Analytics />
                 <main>
                     {children}
                 </main>
