@@ -14,7 +14,7 @@
     "@vercel/speed-insights": "^1.0.10",
     "classnames": "^2.5.1",
     "graphql": "^16.8.1",
-    "next": "15.0.3",
+    "next": "14.2.18",
     "next-session": "^4.0.5",
     "react": "^18",
     "react-dom": "^18",
