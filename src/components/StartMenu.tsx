@@ -6,7 +6,7 @@ import { StartMenuProps } from '../types';
 const StartMenu: React.FC<StartMenuProps> = () => {
     return (
         <div className={styles.startMenu}>
-            <div className={styles.startMenuHeader}>
+            <div className={styles.startMenuSide}>
                 <div className={styles.startMenuLogo}>Windows 95</div>
             </div>
 

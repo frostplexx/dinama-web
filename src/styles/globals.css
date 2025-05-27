@@ -22,10 +22,27 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'MS Sans Serif', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'W95font';
   cursor: default;
 }
 
 * {
   box-sizing: border-box;
+}
+
+
+@font-face {
+  font-family: 'W95font';
+  src: url('/fonts/W95font-Regular.woff2') format('woff2'),
+       url('/fonts/W95font-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'W95font';
+  src: url('/fonts/W95font-Bold.woff2') format('woff2'),
+       url('/fonts/W95font-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
 }

@@ -40,7 +40,7 @@ const Taskbar: React.FC<TaskbarProps> = ({
                     onClick={() => toggleStartMenu()}
                 >
                     <img src="/icons/Windows logo (without text)-1.png" alt="Start" />
-                    <span className='font-bold'>Start</span>
+                    <span className={styles.startText}>Start</span>
                 </Button>
 
                 {startMenuOpen && (

@@ -5,8 +5,8 @@
   color: #000;
   overflow: hidden;
   position: relative;
-  font-family: 'MS Sans Serif', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 11px;
+  font-family: 'W95font';
+  font-size: 13px;
 }
 
 /* Desktop */
@@ -188,7 +188,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 28px;
+  height: 32px;
   background-color: #c0c0c0;
   display: flex;
   align-items: center;
@@ -201,17 +201,22 @@
   position: relative;
 }
 
+.startText {
+    font-weight: bolder;
+    font-size: 15px;
+}
 .startButton {
   display: flex;
   align-items: center;
   padding: 0 4px;
-  height: 22px;
+  height: 25px;
   margin-right: 6px;
+  size: 14px;
 }
 
 .startButton img {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   margin-right: 4px;
 }
 
@@ -219,7 +224,7 @@
   flex: 1;
   display: flex;
   overflow-x: auto;
-  height: 24px;
+  height: 30px;
   padding: 0 4px;
 }
 
@@ -250,18 +255,24 @@
 .tray {
   display: flex;
   align-items: center;
-  padding: 0 8px;
-  height: 22px;
-  border-left: 1px solid #808080;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 3px;
+  height: 25px;
+  border: 2px solid;
+  border-color: hsl(0, 0%, 60%) hsl(0, 0%, 98%) hsl(0, 0%, 98%) hsl(0, 0%, 60%);
+  background: hsl(105, 0%, 84%);
 }
 
 .clock {
-  font-size: 10px;
+  font-size: 14px;
 }
 
 /* Start Menu */
 .startMenu {
   position: absolute;
+  display: flex;
+  flex-direction: row;
   bottom: 28px;
   left: 2px;
   width: 185px;
@@ -272,9 +283,10 @@
   z-index: 1001;
 }
 
-.startMenuHeader {
-  height: 37px;
-  background-color: #000080;
+.startMenuSide {
+  position: relative;
+  width: 37px;
+  background-color: #898890;
   display: flex;
   align-items: center;
   padding: 5px;
@@ -287,7 +299,10 @@
   transform-origin: left center;
   white-space: nowrap;
   position: relative;
-  left: 15px;
+  top: 125px;  /* Add this */
+  bottom: auto;  /* Remove or override the existing bottom */
+  left: 11px;
+  opacity: 0.75;
   font-size: 24px;
 }
 
@@ -347,4 +362,21 @@
 .windowContent h3 {
   margin-top: 0;
   font-size: 12px;
+}
+
+
+@font-face {
+  font-family: 'W95font';
+  src: url('/fonts/W95font-Regular.woff2') format('woff2'),
+       url('/fonts/W95font-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'W95font';
+  src: url('/fonts/W95font-Bold.woff2') format('woff2'),
+       url('/fonts/W95font-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
 }
