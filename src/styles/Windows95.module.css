@@ -226,7 +226,8 @@
   flex: 1;
   display: flex;
   overflow-x: auto;
-  height: 30px;
+  height: 25px;
+  overflow: hidden;
   padding: 0 4px;
 }
 
@@ -235,7 +236,7 @@
   align-items: center;
   min-width: 120px;
   max-width: 200px;
-  height: 22px;
+  height: 25px;
   margin-right: 4px;
   padding: 0 4px;
   overflow: hidden;

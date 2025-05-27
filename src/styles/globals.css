@@ -24,6 +24,7 @@ body {
   margin: 0;
   font-family: 'W95font';
   cursor: url("/cursor/cursor.cur"), auto;
+    overflow: hidden !important;
 }
 
 a,
