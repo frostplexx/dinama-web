@@ -89,7 +89,7 @@ const Window: React.FC<WindowProps> = ({
                 <div className={styles.windowControls}>
                     <Button className={styles.windowButton} onClick={() => { }}>_</Button>
                     <Button className={styles.windowButton} onClick={toggleMaximize}>□</Button>
-                    <Button className={styles.windowCloseButton} onClick={onClose}>×</Button>
+                    <Button className={styles.closeButton} onClick={onClose}>×</Button>
                 </div>
             </div>
 

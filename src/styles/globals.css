@@ -23,7 +23,22 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'W95font';
-  cursor: default;
+  cursor: url("/cursor/cursor.cur"), auto;
+}
+
+a,
+button {
+  cursor: url('/cursor/hand.cur'), pointer;
+}
+
+input,
+textarea {
+  cursor: url('/cursor/text.cur'), text;
+}
+
+.waiting,
+.loading {
+  cursor: url('/cursor/wait.ani'), wait;
 }
 
 * {

@@ -35,7 +35,7 @@
   min-height: 75px;
   margin-bottom: 16px;
   padding: 4px;
-  cursor: pointer;
+  cursor: url('/cursor/hand.cur'), pointer;
 }
 
 .icon:hover {
@@ -93,14 +93,14 @@
 }
 
 .windowTitleBar {
-  height: 18px;
+  height: 25px;
   background-color: #000080;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 2px;
-  cursor: move;
+  cursor: url('/cursor/move.cur'), text;
 }
 
 .activeWindow .windowTitleBar {
@@ -125,21 +125,23 @@
 
 .windowControls {
   display: flex;
+  font-family: 'W95font';
 }
 
+
 .windowButton {
-  width: 16px;
+  width: 20px;
   height: 14px;
-  margin-left: 2px;
-  font-size: 9px;
+  margin: 1px !important;
+  font-size: 18px !important;
   line-height: 1;
 }
 
-.windowCloseButton {
-  width: 16px;
+.closeButton {
+  width: 20px;
   height: 14px;
-  margin-left: 2px;
-  font-size: 9px;
+  font-size: 18px !important;
+  margin-left: 3px !important;
   line-height: 1;
 }
 
@@ -347,7 +349,7 @@
   padding: 0 4px;
   font-size: 11px;
   color: #000;
-  cursor: pointer;
+  cursor: url('/cursor/hand.cur'), pointer;
   margin: 0;
   min-height: 20px;
   outline: none;

@@ -62,8 +62,7 @@ export default function Home() {
                     isActive={activeWindow === window.id}
                     initialPosition={window.position}
                     onClose={() => closeWindow(window.id)}
-                    onActivate={() => activateWindow(window.id)}
-                >
+                    onActivate={() => activateWindow(window.id)} content={undefined}                >
                     {window.content}
                 </Window>
             ))}

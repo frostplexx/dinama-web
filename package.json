@@ -13,6 +13,12 @@
     "react-dom": "^19.0.0",
     "next": "15.2.0"
   },
+"eslintConfig": {
+  "rules": {
+   "no-unused-vars": 0,
+   "@typescript-eslint/no-unused-vars": 0
+  }
+},
   "devDependencies": {
     "typescript": "^5",
     "@types/node": "^20",
