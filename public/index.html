@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Personal Website</title>
+        <link rel="stylesheet" href="/style.css">
+        <script src="/script.js"></script>
+    </head>
+
+    <body  class="crt">
+
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <h3>Effects</h3>
+            <button class="toggle-btn active" id="crtToggle">CRT</button>
+            <button class="toggle-btn active" id="vignetteToggle">Vignette</button>
+            <button class="toggle-btn active" id="backgroundToggle">Background</button>
+        </div>
+        <div class="vignette"></div>
+        <div class="global-container">
+            <div class="container">
+                <header>
+                    <h2>cat about.txt</h2>
+                </header>
+                <p>
+                    Hello there! Welcome to my website where I showcase some of my projects and fun ideas. Browse through the files to discover more about my work. If you have any questions or just want to chat, feel free to reach out. Enjoy your time here!
+                </p>
+            </div>
+
+
+            <div class="container">
+                <header>
+                    <h2>ls -la ~/projects/</h2>
+                </header>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>-rwxr-xr-x</td>
+                            <td>daniel</td>
+                            <td>Dec 15 2024</td>
+                            <td>
+                                <a href="https://github.com/frostplexx/dotfiles.nix">dotfiles.nix</a>
+                                <span class="status-badge status-active">ACTIVE</span><br>
+                                <div class="project-description">My NixOS configuration with flakes</div>
+                                <div class="tech-stack">Nix • Home Manager • Hyprland</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>-rwxr-xr-x</td>
+                            <td>daniel</td>
+                            <td>Nov 28 2024</td>
+                            <td>
+                                <a href="https://github.com/frostplexx/matrix-weather-bot">matrix-weather-bot</a>
+                                <span class="status-badge status-active">ACTIVE</span><br>
+                                <div class="project-description">Weather bot for Matrix chat rooms</div>
+                                <div class="tech-stack">Python • Matrix SDK • OpenWeather API</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>-rwxr-xr-x</td>
+                            <td>daniel</td>
+                            <td>Oct 22 2024</td>
+                            <td>
+                                <a href="https://github.com/frostplexx/homelab-configs">homelab-configs</a>
+                                <span class="status-badge status-maintenance">MAINTENANCE</span><br>
+                                <div class="project-description">Docker compose files for my homelab setup</div>
+                                <div class="tech-stack">Docker • Traefik • Prometheus • Grafana</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>-rwxr-xr-x</td>
+                            <td>daniel</td>
+                            <td>Sep 14 2024</td>
+                            <td>
+                                <a href="https://github.com/frostplexx/terminal-portfolio">terminal-portfolio</a>
+                                <span class="status-badge status-active">ACTIVE</span><br>
+                                <div class="project-description">This website - a terminal-inspired portfolio</div>
+                                <div class="tech-stack">HTML • CSS • JavaScript • CRT Effects</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>-rwxr-xr-x</td>
+                            <td>daniel</td>
+                            <td>Aug 03 2024</td>
+                            <td>
+                                <a href="https://github.com/frostplexx/rust-cli-template">rust-cli-template</a>
+                                <span class="status-badge status-archived">ARCHIVED</span><br>
+                                <div class="project-description">Template for Rust CLI applications</div>
+                                <div class="tech-stack">Rust • Clap • Serde • Tokio</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="container">
+                <header>
+                    <h2>cat social_links.md</h2>
+                </header>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><strong>GitHub</strong></td>
+                            <td><a href="https://github.com/frostplexx">@frostplexx</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td><a href="mailto:me@dinama.dev">me@dinama.dev</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Discord</strong></td>
+                            <td><a href="https://discordapp.com/users/336806197158215682">Frostplexx</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Matrix</strong></td>
+                            <td><a href="https://matrix.to/#/@frostplexx:matrix.org">@frostplexx:matrix.org</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mastodon</strong></td>
+                            <td><a href="https://fosstodon.org/@frostplexx">@frostplexx@fosstodon.org</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="container">
+                <header>
+                    <h2>cat ~/.config/tools.json</h2>
+                </header>
+                <p>Some tools I like using:</p>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><a href="https://obsidian,md">Obsidian Notes</a></td>
+                            <td>Local first note taking app</td>
+                        </tr>
+                        <tr>
+                            <td><a href="https://neovim.io">NeoVim</a></td>
+                            <td>Fast, hackable text editor</td>
+                        </tr>
+                        <!-- <tr> -->
+                        <!--     <td><strong>Tools</strong></td> -->
+                        <!--     <td>Neovim, Git, Hyprland, Tmux, Zellij, Traefik</td> -->
+                        <!-- </tr> -->
+                        <!-- <tr> -->
+                        <!--     <td><strong>Cloud</strong></td> -->
+                        <!--     <td>AWS, Self-hosted solutions, CI/CD pipelines</td> -->
+                        <!-- </tr> -->
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="container">
+                <header>
+                    <h2>uptime --since</h2>
+                </header>
+                <p>
+                    <strong>Current Focus:</strong> Building resilient infrastructure and contributing to open-source projects<br>
+                    <strong>Learning:</strong> Advanced Kubernetes patterns, WebAssembly, and distributed systems<br>
+                    <strong>Fun Fact:</strong> I maintain 47 different dotfiles that somehow still work across 3 different machines ¯\_(ツ)_/¯
+                </p>
+            </div>
+
+
+            <div class="container">
+                <header>
+                    <h2>./fun</h2>
+                </header>
+                <p>
+                     <a href="/doom"><strong>Want to play some DOOM?</strong></a><br>
+                     <a href="/cats"><strong>Cat</strong></a><br>
+                </p>
+            </div>
+
+
+            <footer>
+                <p>
+                    <a href="https://fediring.net/previous?host=dinama.dev">←</a>
+                    <a href="https://fediring.net/">Fediring</a>
+                    <a href="https://fediring.net/next?host=dinama.dev">→</a>
+                </p>
+                <p>
+                    Source available on <a href="https://github.com/frostplexx/dinama-web">GitHub</a>
+                </p>
+            </footer>
+        </div>
+        <canvas class="background" height="512" width="512"></canvas>
+    </body>
+</html>
