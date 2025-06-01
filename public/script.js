@@ -8,10 +8,19 @@ window.onload = function() {
     const vignetteToggle = document.getElementById('vignetteToggle');
     const backgroundToggle = document.getElementById('backgroundToggle');
 
-    // Load saved preferences
-    const savedCRT = localStorage.getItem('crt-enabled') !== 'false';
-    const savedVignette = localStorage.getItem('vignette-enabled') !== 'false';
-    const savedBackground = localStorage.getItem('background-enabled') !== 'false';
+    // Check if localStorage is available (won't work in Claude artifacts)
+    const hasLocalStorage = typeof (Storage) !== "undefined";
+
+    // Load saved preferences (fallback to defaults if localStorage unavailable)
+    let savedCRT = true;
+    let savedVignette = true;
+    let savedBackground = true;
+
+    if (hasLocalStorage) {
+        savedCRT = localStorage.getItem('crt-enabled') !== 'false';
+        savedVignette = localStorage.getItem('vignette-enabled') !== 'false';
+        savedBackground = localStorage.getItem('background-enabled') !== 'false';
+    }
 
     // Apply saved settings
     if (!savedCRT) {
@@ -30,19 +39,25 @@ window.onload = function() {
     crtToggle.addEventListener('click', () => {
         crt.classList.toggle('no-crt');
         crtToggle.classList.toggle('active');
-        localStorage.setItem('crt-enabled', crtToggle.classList.contains('active'));
+        if (hasLocalStorage) {
+            localStorage.setItem('crt-enabled', crtToggle.classList.contains('active'));
+        }
     });
 
     vignetteToggle.addEventListener('click', () => {
         vignette.classList.toggle('no-vignette');
         vignetteToggle.classList.toggle('active');
-        localStorage.setItem('vignette-enabled', vignetteToggle.classList.contains('active'));
+        if (hasLocalStorage) {
+            localStorage.setItem('vignette-enabled', vignetteToggle.classList.contains('active'));
+        }
     });
 
     backgroundToggle.addEventListener('click', () => {
         const isActive = backgroundToggle.classList.toggle('active');
         crt.classList.toggle('no-background');
-        localStorage.setItem('background-enabled', isActive);
+        if (hasLocalStorage) {
+            localStorage.setItem('background-enabled', isActive);
+        }
 
         if (isActive) {
             drawBackground(); // Start animation
@@ -55,7 +70,7 @@ window.onload = function() {
     // Simple animated background
     const canvas = backgroundCanvas;
     const ctx = canvas.getContext("2d");
-    let time = 0;
+    let animationFrameId;
 
     function resizeCanvas() {
         canvas.width = window.innerWidth;
@@ -76,10 +91,11 @@ window.onload = function() {
         let lastFrameTime = 0;
 
         function frame(now = performance.now()) {
-
             if (crt.classList.contains('no-background')) return;
+
+            animationFrameId = requestAnimationFrame(frame);
+
             if (now - lastRender >= FRAME_INTERVAL) {
-                // Calculate delta time based on last frame time
                 const delta = (now - lastFrameTime) / 1000;
                 lastFrameTime = now;
                 lastRender = now;
@@ -98,19 +114,100 @@ window.onload = function() {
 
                     ctx.fillStyle = "rgba(13, 14, 21, 0.05)";
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                    requestAnimationFrame(frame);
                 };
-            } else {
-                requestAnimationFrame(frame);
             }
         }
 
-        // Start the animation loop
-        requestAnimationFrame(frame);
+        animationFrameId = requestAnimationFrame(frame);
     }
 
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
     drawBackground();
-}
+
+    // GitHub Projects Loading
+    async function loadProjects() {
+        const loadingEl = document.getElementById('projects-loading');
+        const errorEl = document.getElementById('projects-error');
+        const tableEl = document.getElementById('projects-table');
+        const tbodyEl = document.getElementById('projects-tbody');
+
+        try {
+            loadingEl.style.display = 'block';
+            errorEl.style.display = 'none';
+            tableEl.style.display = 'none';
+
+            const response = await fetch('/api/github');
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            if (!data.success) {
+                throw new Error(data.message || 'Failed to fetch projects');
+            }
+
+            // Clear existing content
+            tbodyEl.innerHTML = '';
+
+            // Populate projects
+            data.projects.forEach(project => {
+                const row = document.createElement('tr');
+
+                // Format date
+                const date = new Date(project.updatedAt).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: '2-digit',
+                    year: 'numeric'
+                });
+
+                // Status badge class
+                const statusClass = project.status.toLowerCase().replace('_', '-');
+
+                // Tech stack display (limit to avoid overflow)
+                const techStack = project.techStack.slice(0, 4).join(' • ');
+
+                row.innerHTML = `
+                    <td>-rwxr-xr-x</td>
+                    <td>daniel</td>
+                    <td>${date}</td>
+                    <td>
+                        <a href="${project.url}" target="_blank" rel="noopener noreferrer">${project.name}</a>
+                        <span class="status-badge status-${statusClass}">${project.status}</span><br>
+                        <div class="project-description">${project.description}</div>
+                        <div class="tech-stack">${techStack}</div>
+                    </td>
+                `;
+
+                tbodyEl.appendChild(row);
+            });
+
+            loadingEl.style.display = 'none';
+            tableEl.style.display = 'table';
+
+        } catch (error) {
+            console.error('Error loading projects:', error);
+            loadingEl.style.display = 'none';
+            errorEl.style.display = 'block';
+
+            // Show a more user-friendly error message
+            const errorMessage = errorEl.querySelector('p');
+            if (error.message.includes('fetch')) {
+                errorMessage.textContent = 'Failed to connect to GitHub API. ';
+            } else {
+                errorMessage.textContent = `Error: ${error.message} `;
+            }
+        }
+    }
+
+    // Retry functionality
+    const retryBtn = document.getElementById('retry-btn');
+    if (retryBtn) {
+        retryBtn.addEventListener('click', loadProjects);
+    }
+
+    // Load projects when page loads
+    loadProjects();
+};

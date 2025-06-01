@@ -32,72 +32,26 @@
                 </p>
             </div>
 
-
             <div class="container">
                 <header>
                     <h2>ls -la ~/projects/</h2>
+                    <div class="cache-status" id="cache-status" style="display: none;">
+                        <small style="opacity: 0.7;"></small>
+                        <button id="refresh-btn" style="margin-left: 10px; font-size: 0.8em;">↻ Refresh</button>
+                    </div>
                 </header>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>-rwxr-xr-x</td>
-                            <td>daniel</td>
-                            <td>Dec 15 2024</td>
-                            <td>
-                                <a href="https://github.com/frostplexx/dotfiles.nix">dotfiles.nix</a>
-                                <span class="status-badge status-active">ACTIVE</span><br>
-                                <div class="project-description">My NixOS configuration with flakes</div>
-                                <div class="tech-stack">Nix • Home Manager • Hyprland</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>-rwxr-xr-x</td>
-                            <td>daniel</td>
-                            <td>Nov 28 2024</td>
-                            <td>
-                                <a href="https://github.com/frostplexx/matrix-weather-bot">matrix-weather-bot</a>
-                                <span class="status-badge status-active">ACTIVE</span><br>
-                                <div class="project-description">Weather bot for Matrix chat rooms</div>
-                                <div class="tech-stack">Python • Matrix SDK • OpenWeather API</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>-rwxr-xr-x</td>
-                            <td>daniel</td>
-                            <td>Oct 22 2024</td>
-                            <td>
-                                <a href="https://github.com/frostplexx/homelab-configs">homelab-configs</a>
-                                <span class="status-badge status-maintenance">MAINTENANCE</span><br>
-                                <div class="project-description">Docker compose files for my homelab setup</div>
-                                <div class="tech-stack">Docker • Traefik • Prometheus • Grafana</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>-rwxr-xr-x</td>
-                            <td>daniel</td>
-                            <td>Sep 14 2024</td>
-                            <td>
-                                <a href="https://github.com/frostplexx/terminal-portfolio">terminal-portfolio</a>
-                                <span class="status-badge status-active">ACTIVE</span><br>
-                                <div class="project-description">This website - a terminal-inspired portfolio</div>
-                                <div class="tech-stack">HTML • CSS • JavaScript • CRT Effects</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>-rwxr-xr-x</td>
-                            <td>daniel</td>
-                            <td>Aug 03 2024</td>
-                            <td>
-                                <a href="https://github.com/frostplexx/rust-cli-template">rust-cli-template</a>
-                                <span class="status-badge status-archived">ARCHIVED</span><br>
-                                <div class="project-description">Template for Rust CLI applications</div>
-                                <div class="tech-stack">Rust • Clap • Serde • Tokio</div>
-                            </td>
-                        </tr>
+                <div id="projects-loading" class="loading-state">
+                    <p>Loading projects from GitHub...</p>
+                </div>
+                <div id="projects-error" class="error-state" style="display: none;">
+                    <p>Failed to load projects. <button id="retry-btn">Retry</button></p>
+                </div>
+                <table id="projects-table" style="display: none;">
+                    <tbody id="projects-tbody">
+                        <!-- Projects will be loaded here dynamically -->
                     </tbody>
                 </table>
             </div>
-
 
             <div class="container">
                 <header>
@@ -119,18 +73,17 @@
                             <td><strong>Discord</strong></td>
                             <td><a href="https://discordapp.com/users/336806197158215682">Frostplexx</a></td>
                         </tr>
-                        <tr>
-                            <td><strong>Matrix</strong></td>
-                            <td><a href="https://matrix.to/#/@frostplexx:matrix.org">@frostplexx:matrix.org</a></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Mastodon</strong></td>
-                            <td><a href="https://fosstodon.org/@frostplexx">@frostplexx@fosstodon.org</a></td>
-                        </tr>
+                        <!-- <tr> -->
+                        <!--     <td><strong>Matrix</strong></td> -->
+                        <!--     <td><a href="https://matrix.to/#/@frostplexx:matrix.org">@frostplexx:matrix.org</a></td> -->
+                        <!-- </tr> -->
+                        <!-- <tr> -->
+                        <!--     <td><strong>Mastodon</strong></td> -->
+                        <!--     <td><a href="https://fosstodon.org/@frostplexx">@frostplexx@fosstodon.org</a></td> -->
+                        <!-- </tr> -->
                     </tbody>
                 </table>
             </div>
-
 
             <div class="container">
                 <header>
@@ -145,7 +98,6 @@
                 </table>
             </div>
 
-
             <div class="container">
                 <header>
                     <h2>uptime --since</h2>
@@ -157,7 +109,6 @@
                 </p>
             </div>
 
-
             <div class="container">
                 <header>
                     <h2>./fun</h2>
@@ -167,7 +118,6 @@
                     <a href="/cats/cats.html"><strong>Cat</strong></a><br>
                 </p>
             </div>
-
 
             <footer>
                 <p>
@@ -180,8 +130,80 @@
                 </p>
             </footer>
         </div>
-<canvas class="background" width="512" height="512">
-  Your browser does not support canvas.
-</canvas>
+        <canvas class="background" width="512" height="512">
+            Your browser does not support canvas.
+        </canvas>
+
+        <script>
+            // GitHub Projects Loading
+            async function loadProjects() {
+                const loadingEl = document.getElementById('projects-loading');
+                const errorEl = document.getElementById('projects-error');
+                const tableEl = document.getElementById('projects-table');
+                const tbodyEl = document.getElementById('projects-tbody');
+
+                try {
+                    loadingEl.style.display = 'block';
+                    errorEl.style.display = 'none';
+                    tableEl.style.display = 'none';
+
+                    const response = await fetch('/api/github');
+                    const data = await response.json();
+
+                    if (!data.success) {
+                        throw new Error(data.message || 'Failed to fetch projects');
+                    }
+
+                    // Clear existing content
+                    tbodyEl.innerHTML = '';
+
+                    // Populate projects
+                    data.projects.forEach(project => {
+                        const row = document.createElement('tr');
+                        
+                        // Format date
+                        const date = new Date(project.updatedAt).toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: '2-digit',
+                            year: 'numeric'
+                        });
+
+                        // Status badge class
+                        const statusClass = project.status.toLowerCase().replace('_', '-');
+                        
+                        // Tech stack display
+                        const techStack = project.techStack.join(' • ');
+
+                        row.innerHTML = `
+                            <td>-rwxr-xr-x</td>
+                            <td>daniel</td>
+                            <td>${date}</td>
+                            <td>
+                                <a href="${project.url}" target="_blank" rel="noopener noreferrer">${project.name}</a>
+                                <span class="status-badge status-${statusClass}">${project.status}</span><br>
+                                <div class="project-description">${project.description}</div>
+                                <div class="tech-stack">${techStack}</div>
+                            </td>
+                        `;
+                        
+                        tbodyEl.appendChild(row);
+                    });
+
+                    loadingEl.style.display = 'none';
+                    tableEl.style.display = 'table';
+
+                } catch (error) {
+                    console.error('Error loading projects:', error);
+                    loadingEl.style.display = 'none';
+                    errorEl.style.display = 'block';
+                }
+            }
+
+            // Retry functionality
+            document.getElementById('retry-btn').addEventListener('click', loadProjects);
+
+            // Load projects when page loads
+            document.addEventListener('DOMContentLoaded', loadProjects);
+        </script>
     </body>
 </html>
