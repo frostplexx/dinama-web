@@ -62,131 +62,55 @@ window.onload = function() {
         canvas.height = window.innerHeight;
     }
 
-    let animationFrameId = null;
+    const TARGET_FPS = 15;
+    const FRAME_INTERVAL = 1000 / TARGET_FPS;
 
     function drawBackground() {
         if (crt.classList.contains('no-background')) return;
 
-        const w = canvas.width;
-        const h = canvas.height;
-        let t = 0;
+        const canvas = document.querySelector(".background");
+        const ctx = canvas.getContext("2d");
+        canvas.width = canvas.height = 512;
 
-        const particles = Array.from({ length: 100 }, () => ({
-            x: Math.random() * w,
-            y: Math.random() * h,
-            r: Math.random() * 2 + 1,
-            speed: Math.random() * 2 + 0.5
-        }));
+        let lastRender = 0;
+        let lastFrameTime = 0;
 
-        function frame() {
+        function frame(now = performance.now()) {
+
             if (crt.classList.contains('no-background')) return;
+            if (now - lastRender >= FRAME_INTERVAL) {
+                // Calculate delta time based on last frame time
+                const delta = (now - lastFrameTime) / 1000;
+                lastFrameTime = now;
+                lastRender = now;
 
-            t++;
+                const img = new Image();
+                img.src = ctx.canvas.toDataURL("image/jpeg", 0.75 + 0.25 * Math.sin(now / 1000));
+                img.onload = () => {
+                    ctx.drawImage(img, 0, delta * 32);
 
-            // Dirty background wipe
-            ctx.fillStyle = "rgba(10, 10, 20, 0.3)";
-            ctx.fillRect(0, 0, w, h);
+                    for (let i = 0; i < Math.random() * 64; i++) {
+                        ctx.fillStyle = Math.random() > 0.5 ? "#6574a5" : "#0d0e15";
+                        ctx.beginPath();
+                        ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 1.5, 0, 2 * Math.PI);
+                        ctx.fill();
+                    }
 
-            // Low poly nonsense
-            for (let i = 0; i < 4; i++) {
-                const x1 = Math.random() * w;
-                const y1 = Math.random() * h;
-                const x2 = x1 + (Math.random() - 0.5) * 120;
-                const y2 = y1 + (Math.random() - 0.5) * 120;
-                const x3 = x1 + (Math.random() - 0.5) * 120;
-                const y3 = y1 + (Math.random() - 0.5) * 120;
+                    ctx.fillStyle = "rgba(13, 14, 21, 0.05)";
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                ctx.beginPath();
-                ctx.moveTo(x1, y1);
-                ctx.lineTo(x2, y2);
-                ctx.lineTo(x3, y3);
-                ctx.closePath();
-                ctx.fillStyle = `rgba(${Math.floor(100 + Math.random() * 155)}, ${Math.floor(100 + Math.random() * 155)}, ${Math.floor(255 * Math.random())}, 0.05)`;
-                ctx.fill();
+                    requestAnimationFrame(frame);
+                };
+            } else {
+                requestAnimationFrame(frame);
             }
-
-            // Glitch tear bursts
-            if (Math.random() < 0.05) {
-                const y = Math.random() * h;
-                const hGlitch = 4 + Math.random() * 8;
-                ctx.fillStyle = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.3)`;
-                ctx.fillRect(0, y, w, hGlitch);
-            }
-
-            // Choppy particles
-            particles.forEach(p => {
-                ctx.fillStyle = Math.random() > 0.5 ? "#b4befe" : "#585b70";
-                ctx.fillRect(p.x, p.y, p.r, p.r);
-
-                p.y += p.speed;
-                if (p.y > h) {
-                    p.y = 0;
-                    p.x = Math.random() * w;
-                    p.r = Math.random() * 2 + 1;
-                    p.speed = Math.random() * 2 + 0.5;
-                }
-            });
-
-            // Crunchy pixel noise
-            if (Math.random() < 0.25) {
-                const imageData = ctx.getImageData(0, 0, w, h);
-                const data = imageData.data;
-                for (let i = 0; i < data.length; i += 4 * 80) {
-                    const glitch = (Math.random() - 0.5) * 60;
-                    data[i] += glitch;
-                    data[i + 1] += glitch;
-                    data[i + 2] += glitch;
-                }
-                ctx.putImageData(imageData, 0, 0);
-            }
-
-            animationFrameId = requestAnimationFrame(frame);
         }
 
-        frame();
+        // Start the animation loop
+        requestAnimationFrame(frame);
     }
 
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
     drawBackground();
-
-    // Keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey && e.shiftKey) {
-            switch (e.key) {
-                case 'C':
-                    e.preventDefault();
-                    crtToggle.click();
-                    break;
-                case 'V':
-                    e.preventDefault();
-                    vignetteToggle.click();
-                    break;
-                case 'B':
-                    e.preventDefault();
-                    backgroundToggle.click();
-                    break;
-            }
-        }
-    });
-
-    // Easter egg: Konami code
-    let konamiCode = [];
-    const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
-
-    document.addEventListener('keydown', (e) => {
-        console.log(e.code)
-        konamiCode.push(e.code);
-        if (konamiCode.length > konamiSequence.length) {
-            konamiCode.shift();
-        }
-
-        if (konamiCode.join(',') === konamiSequence.join(',')) {
-            // Enable matrix mode
-            crt.style.background = 'black';
-            crt.style.color = '#00ff00';
-            document.querySelectorAll('a').forEach(a => a.style.color = '#00ff00');
-            setTimeout(() => location.reload(), 3000);
-        }
-    });
 }

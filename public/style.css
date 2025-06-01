@@ -344,26 +344,8 @@ filter: none !important;
  .global-container {
         padding: 0.5rem;
         justify-content: flex-start;
-        padding-top: 1rem; /* Reduced from 2rem */
         min-height: 100vh;
         min-height: 100dvh; /* Use dynamic viewport height */
-    }
-
-    .container {
-        width: 95%;
-        margin-top: 0.5rem;
-    }
-
-
-    .crt {
-        padding: 0.25rem;
-        min-height: 100vh;
-        min-height: 100dvh; /* Use dynamic viewport height */
-        font-size: 1.1rem;
-        /* Ensure content stays within viewport */
-        max-height: 100vh;
-        max-height: 100dvh;
-        overflow-y: auto;
     }
 
     header {
