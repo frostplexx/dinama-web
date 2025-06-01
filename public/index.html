@@ -121,12 +121,33 @@
                 </p>
             </div>
 
+
+            <div class="container">
+                <!-- <header> -->
+                <!--     <h2>./fun</h2> -->
+                <!-- </header> -->
+                <div class="banners">
+                    <a href="https://neovim.io/"><img src="/assets/banners/neovim.gif"></a>
+                    <img src="/assets/banners/i_like_computer.png" alt="i like computer">
+                    <iframe src="//incr.easrng.net/badge?key=frstplx" style="background: url(//incr.easrng.net/bg.gif)" title="increment badge" width="88" height="31" frameborder="0"></iframe>
+                    <a href="https://www.steamdeck.com/"><img src="/assets/banners/steamdeck.png" alt="Steam Deck Now!" title="Steam Deck"></a>
+                    <img src="/assets/banners/duckduckgo.png" alt="">
+                    <img src="/assets/banners/wii-shop-channel.gif" alt="Wii Shop Channel">
+                    <a href="https://fedi.underpowe.red/notice/An1zXpw0eMdAKN3mgy" target="_blank" class="button" title="nixos!">
+                        <img src="/assets/banners/nix_dark.png" alt="nixos">
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" class="button" target="_blank" title="css is hard, maybe this will help">
+                            <img src="/assets/banners/css-difficult.gif">
+                        </a>
+                    </a>
+                </div>
+            </div>
+
             <footer>
-                <p>
-                    <a href="https://fediring.net/previous?host=dinama.dev">←</a>
-                    <a href="https://fediring.net/">Fediring</a>
-                    <a href="https://fediring.net/next?host=dinama.dev">→</a>
-                </p>
+                <!-- <p> -->
+                <!--     <a href="https://fediring.net/previous?host=dinama.dev">←</a> -->
+                <!--     <a href="https://fediring.net/">Fediring</a> -->
+                <!--     <a href="https://fediring.net/next?host=dinama.dev">→</a> -->
+                <!-- </p> -->
                 <p>
                     Source available on <a href="https://github.com/frostplexx/dinama-web">GitHub</a>
                 </p>
@@ -137,75 +158,75 @@
         </canvas>
 
         <script>
-            // GitHub Projects Loading
-            async function loadProjects() {
-                const loadingEl = document.getElementById('projects-loading');
-                const errorEl = document.getElementById('projects-error');
-                const tableEl = document.getElementById('projects-table');
-                const tbodyEl = document.getElementById('projects-tbody');
+        // GitHub Projects Loading
+        async function loadProjects() {
+            const loadingEl = document.getElementById('projects-loading');
+            const errorEl = document.getElementById('projects-error');
+            const tableEl = document.getElementById('projects-table');
+            const tbodyEl = document.getElementById('projects-tbody');
 
-                try {
-                    loadingEl.style.display = 'block';
-                    errorEl.style.display = 'none';
-                    tableEl.style.display = 'none';
+            try {
+                loadingEl.style.display = 'block';
+                errorEl.style.display = 'none';
+                tableEl.style.display = 'none';
 
-                    const response = await fetch('/api/github');
-                    const data = await response.json();
+                const response = await fetch('/api/github');
+                const data = await response.json();
 
-                    if (!data.success) {
-                        throw new Error(data.message || 'Failed to fetch projects');
-                    }
+                if (!data.success) {
+                    throw new Error(data.message || 'Failed to fetch projects');
+                }
 
-                    // Clear existing content
-                    tbodyEl.innerHTML = '';
+                // Clear existing content
+                tbodyEl.innerHTML = '';
 
-                    // Populate projects
-                    data.projects.forEach(project => {
-                        const row = document.createElement('tr');
-                        
-                        // Format date
-                        const date = new Date(project.updatedAt).toLocaleDateString('en-US', {
-                            month: 'short',
-                            day: '2-digit',
-                            year: 'numeric'
-                        });
+                // Populate projects
+                data.projects.forEach(project => {
+                    const row = document.createElement('tr');
 
-                        // Status badge class
-                        const statusClass = project.status.toLowerCase().replace('_', '-');
-                        
-                        // Tech stack display
-                        const techStack = project.techStack.join(' • ');
-
-                        row.innerHTML = `
-                            <td>-rwxr-xr-x</td>
-                            <td>daniel</td>
-                            <td>${date}</td>
-                            <td>
-                                <a href="${project.url}" target="_blank" rel="noopener noreferrer">${project.name}</a>
-                                <span class="status-badge status-${statusClass}">${project.status}</span><br>
-                                <div class="project-description">${project.description}</div>
-                                <div class="tech-stack">${techStack}</div>
-                            </td>
-                        `;
-                        
-                        tbodyEl.appendChild(row);
+                    // Format date
+                    const date = new Date(project.updatedAt).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: '2-digit',
+                        year: 'numeric'
                     });
 
-                    loadingEl.style.display = 'none';
-                    tableEl.style.display = 'table';
+                    // Status badge class
+                    const statusClass = project.status.toLowerCase().replace('_', '-');
 
-                } catch (error) {
-                    console.error('Error loading projects:', error);
-                    loadingEl.style.display = 'none';
-                    errorEl.style.display = 'block';
-                }
+                    // Tech stack display
+                    const techStack = project.techStack.join(' • ');
+
+                    row.innerHTML = `
+<td>-rwxr-xr-x</td>
+<td>daniel</td>
+<td>${date}</td>
+<td>
+    <a href="${project.url}" target="_blank" rel="noopener noreferrer">${project.name}</a>
+    <span class="status-badge status-${statusClass}">${project.status}</span><br>
+    <div class="project-description">${project.description}</div>
+    <div class="tech-stack">${techStack}</div>
+</td>
+`;
+
+                    tbodyEl.appendChild(row);
+                });
+
+                loadingEl.style.display = 'none';
+                tableEl.style.display = 'table';
+
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                loadingEl.style.display = 'none';
+                errorEl.style.display = 'block';
             }
+        }
 
-            // Retry functionality
-            document.getElementById('retry-btn').addEventListener('click', loadProjects);
+        // Retry functionality
+        document.getElementById('retry-btn').addEventListener('click', loadProjects);
 
-            // Load projects when page loads
-            document.addEventListener('DOMContentLoaded', loadProjects);
+        // Load projects when page loads
+        document.addEventListener('DOMContentLoaded', loadProjects);
         </script>
     </body>
 </html>
