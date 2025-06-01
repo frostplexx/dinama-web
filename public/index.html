@@ -8,18 +8,21 @@
         <script src="/script.js"></script>
     </head>
 
-    <body  class="crt">
+    <body>
+        <div class="crt"></div>
 
-
-        <!-- Control Panel -->
-        <div class="control-panel">
-            <h3>Effects</h3>
-            <button class="toggle-btn active" id="crtToggle">CRT</button>
-            <button class="toggle-btn active" id="vignetteToggle">Vignette</button>
-            <button class="toggle-btn active" id="backgroundToggle">Background</button>
-        </div>
         <div class="vignette"></div>
         <div class="global-container">
+
+            <div class="container">
+                <header>
+                    <h2>system.cfg</h2>
+                </header>
+                <button class="toggle-btn active" id="crtToggle">CRT</button>
+                <button class="toggle-btn active" id="vignetteToggle">Vignette</button>
+                <button class="toggle-btn active" id="backgroundToggle">Background</button>
+            </div>
+
             <div class="container">
                 <header>
                     <h2>cat about.txt</h2>
@@ -104,7 +107,9 @@
                     <tbody>
                         <tr>
                             <td><strong>GitHub</strong></td>
-                            <td><a href="https://github.com/frostplexx">@frostplexx</a></td>
+                            <td>
+                                <a href="https://github.com/frostplexx" target="_blank" rel="noopener noreferrer">@frostplexx</a>
+                            </td>
                         </tr>
                         <tr>
                             <td><strong>Email</strong></td>
@@ -133,24 +138,10 @@
                 </header>
                 <p>Some tools I like using:</p>
                 <table>
-                    <tbody>
-                        <tr>
-                            <td><a href="https://obsidian,md">Obsidian Notes</a></td>
-                            <td>Local first note taking app</td>
-                        </tr>
-                        <tr>
-                            <td><a href="https://neovim.io">NeoVim</a></td>
-                            <td>Fast, hackable text editor</td>
-                        </tr>
-                        <!-- <tr> -->
-                        <!--     <td><strong>Tools</strong></td> -->
-                        <!--     <td>Neovim, Git, Hyprland, Tmux, Zellij, Traefik</td> -->
-                        <!-- </tr> -->
-                        <!-- <tr> -->
-                        <!--     <td><strong>Cloud</strong></td> -->
-                        <!--     <td>AWS, Self-hosted solutions, CI/CD pipelines</td> -->
-                        <!-- </tr> -->
-                    </tbody>
+                    <ul>
+                        <li><a href="https://obsidian.md">Obsidian Notes</a> – Local first note taking app</li>
+                        <li><a href="https://neovim.io">NeoVim</a> – Fast, hackable text editor</li>
+                    </ul>
                 </table>
             </div>
 
@@ -172,8 +163,8 @@
                     <h2>./fun</h2>
                 </header>
                 <p>
-                     <a href="/doom"><strong>Want to play some DOOM?</strong></a><br>
-                     <a href="/cats"><strong>Cat</strong></a><br>
+                    <a href="/doom"><strong>Want to play some DOOM?</strong></a><br>
+                    <a href="/cats"><strong>Cat</strong></a><br>
                 </p>
             </div>
 
@@ -189,6 +180,8 @@
                 </p>
             </footer>
         </div>
-        <canvas class="background" height="512" width="512"></canvas>
+<canvas class="background" width="512" height="512">
+  Your browser does not support canvas.
+</canvas>
     </body>
 </html>

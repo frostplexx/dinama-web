@@ -11,6 +11,11 @@
     box-sizing: border-box;
 }
 
+
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
     height: 100%;
     overflow-x: hidden;
@@ -52,6 +57,10 @@ body {
     min-height: 100vh;
     width: 100%;
     transition: background 0.3s ease, color 0.3s ease;
+    /* Add these lines */
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .global-container {
@@ -199,18 +208,6 @@ footer p {
     color: var(--ctp-mocha-base);
 }
 
-/* CRT Effects */
-.crt {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    width: 100%;
-    padding: 0.5rem;
-    filter: url(#SphereMapTest);
-}
 
 .vignette::before {
     content: "";
@@ -223,11 +220,14 @@ footer p {
     height: 100%;
     z-index: 1;
     pointer-events: none;
+    /* Add this to prevent it from affecting layout */
+    will-change: transform;
 }
 
-.crt>p::selection {
+
+*::selection {
     color: black;
-    background: green;
+    background: var(--ctp-mocha-green);
 }
 
 @keyframes flicker {
@@ -254,12 +254,32 @@ footer p {
 100% { opacity: 0.24387; }
 }
 
-@keyframes textShadow {
-0% { text-shadow: 0.2px 0 1px rgba(0, 30, 255, 0.08), -0.2px 0 1px rgba(255, 0, 80, 0.15), 0 0 3px; }
-25% { text-shadow: 0.4px 0 1px rgba(0, 30, 255, 0.08), -0.4px 0 1px rgba(255, 0, 80, 0.15), 0 0 3px; }
-50% { text-shadow: 0.1px 0 1px rgba(0, 30, 255, 0.08), -0.1px 0 1px rgba(255, 0, 80, 0.15), 0 0 3px; }
-75% { text-shadow: 0.6px 0 1px rgba(0, 30, 255, 0.08), -0.6px 0 1px rgba(255, 0, 80, 0.15), 0 0 3px; }
-100% { text-shadow: 0.5px 0 1px rgba(0, 30, 255, 0.08), -0.5px 0 1px rgba(255, 0, 80, 0.15), 0 0 3px; }
+ @keyframes textShadow {
+            0%, 100% { 
+                text-shadow: 0.2px 0 1px rgba(0, 30, 255, 0.08), 
+                           -0.2px 0 1px rgba(255, 0, 80, 0.15); 
+            }
+            50% { 
+                text-shadow: 0.4px 0 1px rgba(0, 30, 255, 0.08), 
+                           -0.4px 0 1px rgba(255, 0, 80, 0.15); 
+            }
+        }
+
+
+/* CRT Effects */
+.crt::before{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 0.5rem;
+    filter: url(#SphereMapTest);
+    /* Add these lines to contain the filter effects */
+    contain: layout style paint;
+    /* DON'T add overflow: hidden here - it breaks scrolling */
 }
 
 .crt::after {
@@ -295,14 +315,15 @@ footer p {
     pointer-events: none;
 }
 
-.crt {
+body {
     animation: textShadow 1.6s infinite;
 }
 
 /* Disabled states */
 .no-crt::after,
 .no-crt::before {
-    display: none;
+    display: none !important;
+filter: none !important;
 }
 
 .no-crt {
@@ -320,10 +341,12 @@ footer p {
 
 /* Mobile-specific adjustments */
 @media (max-width: 768px) {
-    .global-container {
+ .global-container {
         padding: 0.5rem;
         justify-content: flex-start;
-        padding-top: 2rem;
+        padding-top: 1rem; /* Reduced from 2rem */
+        min-height: 100vh;
+        min-height: 100dvh; /* Use dynamic viewport height */
     }
 
     .container {
@@ -331,10 +354,16 @@ footer p {
         margin-top: 0.5rem;
     }
 
+
     .crt {
         padding: 0.25rem;
-        min-height: 100dvh;
+        min-height: 100vh;
+        min-height: 100dvh; /* Use dynamic viewport height */
         font-size: 1.1rem;
+        /* Ensure content stays within viewport */
+        max-height: 100vh;
+        max-height: 100dvh;
+        overflow-y: auto;
     }
 
     header {
