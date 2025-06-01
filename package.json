@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "next": "^15.3.3",
     "vercel": "^42.1.1"
   }
 }
