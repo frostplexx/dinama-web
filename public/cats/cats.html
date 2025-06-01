@@ -1,27 +1,45 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Cat 🐱</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8"/>
-    <link href="./cats.css" rel="stylesheet" type="text/css">
-</head>
-<body style="overflow: hidden; background: #24273a; height: 100vh;">
-    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
-        <div>
-            <h1 style="font-family: 'JetbrainsMono'; font-size: 5rem; color: aliceblue;">Cat for you</h1>
-        </div>
-        <img src="https://cataas.com/cat">
-    </div>
-</body>
-<style>
-    @font-face {
-    font-family: 'JetbrainsMono';
-    src: url('/assets/font/JetBrainsMono-Medium.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
+    <head>
+        <title>Cat 🐱</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8"/>
+        <link href="./cats.css" rel="stylesheet" type="text/css">
+    </head>
+    <body style="background: #24273a; height: 100vh;">
 
-</style>
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <div>
+                <h1 style="font-family: mono; color: aliceblue;">Cat for you</h1>
+            </div>
+            <button onclick="meowPlay()" id="meow-btn">meow</button>
+            <audio id="meow-audio" hidden=""><source src="/assets/meow.mp3" type="audio/mpeg"></audio>
+            <img src="https://cataas.com/cat">
+        </div>
+    </body>
+    <style>
+    @font-face {
+        font-family: 'JetbrainsMono';
+        src: url('/assets/font/JetBrainsMono-Medium.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    </style>
+
+    <script>
+    const meow = document.getElementById("meow-audio");
+    meow.preservesPitch = false;
+
+    function meowPlay() {
+        meow.playbackRate = 0.75 + (Math.random() * 0.5);
+        if (meow.paused) {
+            meow.play();
+        } else {
+            meow.currentTime = 0;
+        }
+    }
+    </script>
+
 </html>
