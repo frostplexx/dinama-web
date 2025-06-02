@@ -1,8 +1,7 @@
 import Redis from 'ioredis';
 
-const LOCAL_CACHE_DURATION = 7 * 24 * 60 * 60 * 1000;
-const REDIS_CACHE_DURATION = 7 * 24 * 60 * 60 * 1000;
-const REDIS_TTL_SECONDS = 7 * 24 * 60 * 60;
+// Cache configuration
+const CACHE_DURATION = 15 * 60 * 1000; // 15 minutes
 const CACHE_KEY = 'github:projects';
 
 let redis = null;
@@ -46,7 +45,7 @@ let localCache = {
 async function getValidCache() {
     const now = Date.now();
 
-    if (localCache.data && localCache.timestamp && (now - localCache.timestamp) < LOCAL_CACHE_DURATION) {
+    if (localCache.data && localCache.timestamp && (now - localCache.timestamp) < CACHE_DURATION) {
         console.log('✓ Serving from local cache');
         return { ...localCache, source: 'local' };
     }
@@ -56,7 +55,7 @@ async function getValidCache() {
             const cached = await redis.get(CACHE_KEY);
             if (cached) {
                 const redisCache = JSON.parse(cached);
-                if (redisCache.timestamp && (now - redisCache.timestamp) < REDIS_CACHE_DURATION) {
+                if (redisCache.timestamp && (now - redisCache.timestamp) < CACHE_DURATION) {
                     localCache = {
                         data: redisCache.data,
                         timestamp: redisCache.timestamp,
@@ -64,18 +63,12 @@ async function getValidCache() {
                     };
                     console.log('✓ Serving from Redis cache (updated local)');
                     return { ...redisCache, source: 'redis' };
-                } else {
-                    console.log('⚠ Redis cache expired, will fetch fresh data');
                 }
-            } else {
-                console.log('⚠ No data found in Redis cache');
             }
         } catch (error) {
             console.warn('Redis cache read failed:', error.message);
             redisAvailable = false;
         }
-    } else {
-        console.log('⚠ Redis unavailable for cache read');
     }
 
     if (localCache.data && localCache.timestamp) {
@@ -102,8 +95,8 @@ async function updateCache(data, etag) {
 
     if (redisAvailable && redis) {
         try {
-            await redis.setex(CACHE_KEY, REDIS_TTL_SECONDS, JSON.stringify(cache));
-            console.log('✓ Redis cache updated (TTL: 7 days)');
+            await redis.setex(CACHE_KEY, Math.ceil(CACHE_DURATION / 1000), JSON.stringify(cache));
+            console.log('✓ Redis cache updated');
         } catch (error) {
             console.warn('Redis cache write failed:', error.message);
             redisAvailable = false;
@@ -121,14 +114,11 @@ function getCacheStatus() {
         local: {
             available: !!localCache.data,
             age: localCache.timestamp ? Math.floor((now - localCache.timestamp) / 1000) : null,
-            valid: localCache.timestamp && (now - localCache.timestamp) < LOCAL_CACHE_DURATION,
-            duration: `${LOCAL_CACHE_DURATION / 1000 / 60} minutes`
+            valid: localCache.timestamp && (now - localCache.timestamp) < CACHE_DURATION
         },
         redis: {
             available: redisAvailable,
-            connected: redis?.status === 'ready',
-            duration: `${REDIS_CACHE_DURATION / 1000 / 60 / 60 / 24} days`,
-            ttl: `${REDIS_TTL_SECONDS / 60 / 60 / 24} days`
+            connected: redis?.status === 'ready'
         }
     };
 }
@@ -150,19 +140,8 @@ export default async function handler(req, res) {
     }
 
     if (req.query.debug === 'cache') {
-        // Also check Redis TTL if available
-        let redisTTL = null;
-        if (redisAvailable && redis) {
-            try {
-                redisTTL = await redis.ttl(CACHE_KEY);
-            } catch (error) {
-                console.warn('Failed to get Redis TTL:', error.message);
-            }
-        }
-
         return res.status(200).json({
             cacheStatus: getCacheStatus(),
-            redisTTL: redisTTL ? `${Math.floor(redisTTL / 60 / 60 / 24)} days, ${Math.floor((redisTTL % (60 * 60 * 24)) / 60 / 60)} hours` : 'N/A',
             timestamp: new Date().toISOString()
         });
     }
