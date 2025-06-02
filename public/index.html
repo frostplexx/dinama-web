@@ -4,8 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Personal Website</title>
-        <link rel="stylesheet" href="/style.css">
-        <script src="/script.js"></script>
+    <link rel="preload" href="/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="stylesheet" href="/catppuccin.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/script.js" as="script">
     </head>
 
     <body>
@@ -40,17 +41,20 @@
                         <button id="refresh-btn" style="margin-left: 10px; font-size: 0.8em;">↻ Refresh</button>
                     </div>
                 </header>
-                <div id="projects-loading" class="loading-state">
-                    <p>Loading projects from GitHub...</p>
+                <!-- Fixed height container to prevent layout shift -->
+                <div class="projects-container" style="min-height: 200px; position: relative;">
+                    <div id="projects-loading" class="loading-state" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; text-align: center;">
+                        <p>Loading projects...</p>
+                    </div>
+                    <div id="projects-error" class="error-state" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; text-align: center;">
+                        <p>Failed to load projects. <button id="retry-btn">Retry</button></p>
+                    </div>
+                    <table id="projects-table" style="display: none; width: 100%;">
+                        <tbody id="projects-tbody">
+                            <!-- Projects will be loaded here dynamically -->
+                        </tbody>
+                    </table>
                 </div>
-                <div id="projects-error" class="error-state" style="display: none;">
-                    <p>Failed to load projects. <button id="retry-btn">Retry</button></p>
-                </div>
-                <table id="projects-table" style="display: none;">
-                    <tbody id="projects-tbody">
-                        <!-- Projects will be loaded here dynamically -->
-                    </tbody>
-                </table>
             </div>
 
             <div class="container">
@@ -62,16 +66,16 @@
                         <tr>
                             <td><strong>GitHub</strong></td>
                             <td>
-                                <a href="https://github.com/frostplexx" target="_blank" rel="noopener noreferrer">@frostplexx</a>
+                                <a aria-label="Link to my GitHub Profile" href="https://github.com/frostplexx" target="_blank" rel="noopener noreferrer">@frostplexx</a>
                             </td>
                         </tr>
                         <tr>
                             <td><strong>Email</strong></td>
-                            <td><a href="mailto:me@dinama.dev">me@dinama.dev</a></td>
+                            <td><a aria-label="mailto link for my email" href="mailto:me@dinama.dev">me@dinama.dev</a></td>
                         </tr>
                         <tr>
                             <td><strong>Discord</strong></td>
-                            <td><a href="https://discordapp.com/users/336806197158215682">Frostplexx</a></td>
+                            <td><a aria-label="Link to my Discord Profile" href="https://discordapp.com/users/336806197158215682">Frostplexx</a></td>
                         </tr>
                         <!-- <tr> -->
                         <!--     <td><strong>Matrix</strong></td> -->
@@ -92,10 +96,10 @@
                 <p>Some tools I like using:</p>
                 <table>
                     <ul>
-                        <li><a href="https://obsidian.md">Obsidian Notes</a> – Local first note taking app</li>
-                        <li><a href="https://neovim.io">NeoVim</a> – Fast, hackable text editor</li>
-                        <li><a href="https://sw.kovidgoyal.net/kitty">kitty</a> – The fast, feature-rich, GPU based terminal emulator</li>
-                        <li><a href="https://nixos.org/">Nix</a> – System for reproducible, declarative and reliable systems</li>
+                        <li><a aria-label="Obsidian" href="https://obsidian.md">Obsidian Notes</a> – Local first note taking app</li>
+                        <li><a aria-label="NeoVim" href="https://neovim.io">NeoVim</a> – Fast, hackable text editor</li>
+                        <li><a aria-label="kitty terminal" href="https://sw.kovidgoyal.net/kitty">kitty</a> – The fast, feature-rich, GPU based terminal emulator</li>
+                        <li><a aria-label="NixOS" href="https://nixos.org/">Nix</a> – System for reproducible, declarative and reliable systems</li>
                     </ul>
                 </table>
             </div>
@@ -116,28 +120,29 @@
                     <h2>./fun</h2>
                 </header>
                 <p>
-                    <a href="/doom/doom.html"><strong>Want to play some DOOM?</strong></a><br>
-                    <a href="/cats/cats.html"><strong>Cat</strong></a><br>
+                    <a aria-label="DOOM" href="/doom/doom.html"><strong>Want to play some DOOM?</strong></a><br>
+                    <a aria-label="Cats" href="/cats/cats.html"><strong>Cat</strong></a><br>
                 </p>
             </div>
 
-
+            <!-- Pre-sized container for banners to prevent layout shift -->
             <div class="container">
-                <!-- <header> -->
-                <!--     <h2>./fun</h2> -->
-                <!-- </header> -->
-                <div class="banners">
-                    <a href="https://neovim.io/"><img src="/assets/banners/neovim.gif"></a>
-                    <img src="/assets/banners/i_like_computer.png" alt="i like computer">
+                <div class="banners" style="min-height: 120px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+                    <a aria-label="NeoVim" href="https://neovim.io/">
+                        <img src="/assets/banners/neovim.gif" alt="neovim" style="width: 88px; height: 31px; object-fit: contain;">
+                    </a>
+                    <img src="/assets/banners/i_like_computer.png" alt="i like computer" style="width: 88px; height: 31px; object-fit: contain;">
                     <iframe src="//incr.easrng.net/badge?key=frstplx" style="background: url(//incr.easrng.net/bg.gif)" title="increment badge" width="88" height="31" frameborder="0"></iframe>
-                    <a href="https://www.steamdeck.com/"><img src="/assets/banners/steamdeck.png" alt="Steam Deck Now!" title="Steam Deck"></a>
-                    <img src="/assets/banners/duckduckgo.png" alt="">
-                    <img src="/assets/banners/wii-shop-channel.gif" alt="Wii Shop Channel">
-                    <a href="https://fedi.underpowe.red/notice/An1zXpw0eMdAKN3mgy" target="_blank" class="button" title="nixos!">
-                        <img src="/assets/banners/nix_dark.png" alt="nixos">
-                        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" class="button" target="_blank" title="css is hard, maybe this will help">
-                            <img src="/assets/banners/css-difficult.gif">
-                        </a>
+                    <a aria-label="Steam Deck" href="https://www.steamdeck.com/">
+                        <img src="/assets/banners/steamdeck.png" alt="Steam Deck Now!" title="Steam Deck" style="width: 88px; height: 31px; object-fit: contain;">
+                    </a>
+                    <img src="/assets/banners/duckduckgo.png" alt="" style="width: 88px; height: 31px; object-fit: contain;">
+                    <img src="/assets/banners/wii-shop-channel.gif" alt="Wii Shop Channel" style="width: 88px; height: 31px; object-fit: contain;">
+                    <a aria-label="NixOS" href="https://fedi.underpowe.red/notice/An1zXpw0eMdAKN3mgy" target="_blank" class="button" title="nixos!">
+                        <img src="/assets/banners/nix_dark.png" alt="nixos" style="width: 88px; height: 31px; object-fit: contain;">
+                    </a>
+                    <a aria-label="CSS is hard" href="https://developer.mozilla.org/en-US/docs/Web/CSS" class="button" target="_blank" title="css is hard, maybe this will help">
+                        <img alt="css is difficult" src="/assets/banners/css-difficult.gif" style="width: 88px; height: 31px; object-fit: contain;">
                     </a>
                 </div>
             </div>
@@ -158,14 +163,16 @@
         </canvas>
 
         <script>
-        // GitHub Projects Loading
+        // GitHub Projects Loading with smooth transitions
         async function loadProjects() {
             const loadingEl = document.getElementById('projects-loading');
             const errorEl = document.getElementById('projects-error');
             const tableEl = document.getElementById('projects-table');
             const tbodyEl = document.getElementById('projects-tbody');
+            const containerEl = document.querySelector('.projects-container');
 
             try {
+                // Show loading state
                 loadingEl.style.display = 'block';
                 errorEl.style.display = 'none';
                 tableEl.style.display = 'none';
@@ -202,7 +209,7 @@
 <td>daniel</td>
 <td>${date}</td>
 <td>
-    <a href="${project.url}" target="_blank" rel="noopener noreferrer">${project.name}</a>
+    <a aria-label="${project.url}" href="${project.url}" target="_blank" rel="noopener noreferrer">${project.name}</a>
     <span class="status-badge status-${statusClass}">${project.status}</span><br>
     <div class="project-description">${project.description}</div>
     <div class="tech-stack">${techStack}</div>
@@ -212,21 +219,67 @@
                     tbodyEl.appendChild(row);
                 });
 
-                loadingEl.style.display = 'none';
+                // Calculate the actual height needed and update container
                 tableEl.style.display = 'table';
+                const tableHeight = tableEl.offsetHeight;
+                
+                // Smoothly transition to the actual content height
+                containerEl.style.minHeight = Math.max(200, tableHeight) + 'px';
+                
+                // Hide loading after a brief moment to ensure smooth transition
+                setTimeout(() => {
+                    loadingEl.style.display = 'none';
+                }, 100);
 
             } catch (error) {
                 console.error('Error loading projects:', error);
                 loadingEl.style.display = 'none';
                 errorEl.style.display = 'block';
+                // Keep minimum height for error state
+                containerEl.style.minHeight = '200px';
             }
         }
 
         // Retry functionality
-        document.getElementById('retry-btn').addEventListener('click', loadProjects);
+        document.getElementById('retry-btn').addEventListener('click', () => {
+            const containerEl = document.querySelector('.projects-container');
+            containerEl.style.minHeight = '200px'; // Reset to loading height
+            loadProjects();
+        });
 
         // Load projects when page loads
         document.addEventListener('DOMContentLoaded', loadProjects);
+
+        // Add CSS for smooth transitions
+        const style = document.createElement('style');
+        style.textContent = `
+            .projects-container {
+                transition: min-height 0.3s ease-out;
+            }
+            
+            #projects-loading, #projects-error {
+                transition: opacity 0.2s ease-in-out;
+            }
+            
+            #projects-table {
+                transition: opacity 0.2s ease-in-out;
+            }
+            
+            .banners img, .banners iframe {
+                display: block;
+                flex-shrink: 0;
+            }
+            
+            /* Ensure consistent banner sizing */
+            .banners {
+                line-height: 1;
+            }
+            
+            .banners > * {
+                margin: 2px;
+            }
+        `;
+        document.head.appendChild(style);
         </script>
     </body>
 </html>
