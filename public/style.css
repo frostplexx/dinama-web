@@ -476,3 +476,30 @@ filter: none !important;
         min-height: 100vh;
     }
 }
+
+
+.projects-container {
+    transition: min-height 0.3s ease-out;
+}
+
+#projects-loading, #projects-error {
+    transition: opacity 0.2s ease-in-out;
+}
+
+#projects-table {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.banners img, .banners iframe {
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Ensure consistent banner sizing */
+.banners {
+    line-height: 1;
+}
+
+.banners > * {
+    margin: 2px;
+}

@@ -6,7 +6,7 @@
         <title>Personal Website</title>
     <link rel="preload" href="/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="/catppuccin.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="/script.js" as="script">
+    <script type="text/javascript" src="/script.js"></script>
     </head>
 
     <body>
@@ -36,10 +36,6 @@
             <div class="container">
                 <header>
                     <h2>ls -la ~/projects/</h2>
-                    <div class="cache-status" id="cache-status" style="display: none;">
-                        <small style="opacity: 0.7;"></small>
-                        <button id="refresh-btn" style="margin-left: 10px; font-size: 0.8em;">↻ Refresh</button>
-                    </div>
                 </header>
                 <!-- Fixed height container to prevent layout shift -->
                 <div class="projects-container" style="min-height: 200px; position: relative;">
@@ -162,124 +158,5 @@
             Your browser does not support canvas.
         </canvas>
 
-        <script>
-        // GitHub Projects Loading with smooth transitions
-        async function loadProjects() {
-            const loadingEl = document.getElementById('projects-loading');
-            const errorEl = document.getElementById('projects-error');
-            const tableEl = document.getElementById('projects-table');
-            const tbodyEl = document.getElementById('projects-tbody');
-            const containerEl = document.querySelector('.projects-container');
-
-            try {
-                // Show loading state
-                loadingEl.style.display = 'block';
-                errorEl.style.display = 'none';
-                tableEl.style.display = 'none';
-
-                const response = await fetch('/api/github');
-                const data = await response.json();
-
-                if (!data.success) {
-                    throw new Error(data.message || 'Failed to fetch projects');
-                }
-
-                // Clear existing content
-                tbodyEl.innerHTML = '';
-
-                // Populate projects
-                data.projects.forEach(project => {
-                    const row = document.createElement('tr');
-
-                    // Format date
-                    const date = new Date(project.updatedAt).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: '2-digit',
-                        year: 'numeric'
-                    });
-
-                    // Status badge class
-                    const statusClass = project.status.toLowerCase().replace('_', '-');
-
-                    // Tech stack display
-                    const techStack = project.techStack.join(' • ');
-
-                    row.innerHTML = `
-<td>-rwxr-xr-x</td>
-<td>daniel</td>
-<td>${date}</td>
-<td>
-    <a aria-label="${project.url}" href="${project.url}" target="_blank" rel="noopener noreferrer">${project.name}</a>
-    <span class="status-badge status-${statusClass}">${project.status}</span><br>
-    <div class="project-description">${project.description}</div>
-    <div class="tech-stack">${techStack}</div>
-</td>
-`;
-
-                    tbodyEl.appendChild(row);
-                });
-
-                // Calculate the actual height needed and update container
-                tableEl.style.display = 'table';
-                const tableHeight = tableEl.offsetHeight;
-                
-                // Smoothly transition to the actual content height
-                containerEl.style.minHeight = Math.max(200, tableHeight) + 'px';
-                
-                // Hide loading after a brief moment to ensure smooth transition
-                setTimeout(() => {
-                    loadingEl.style.display = 'none';
-                }, 100);
-
-            } catch (error) {
-                console.error('Error loading projects:', error);
-                loadingEl.style.display = 'none';
-                errorEl.style.display = 'block';
-                // Keep minimum height for error state
-                containerEl.style.minHeight = '200px';
-            }
-        }
-
-        // Retry functionality
-        document.getElementById('retry-btn').addEventListener('click', () => {
-            const containerEl = document.querySelector('.projects-container');
-            containerEl.style.minHeight = '200px'; // Reset to loading height
-            loadProjects();
-        });
-
-        // Load projects when page loads
-        document.addEventListener('DOMContentLoaded', loadProjects);
-
-        // Add CSS for smooth transitions
-        const style = document.createElement('style');
-        style.textContent = `
-            .projects-container {
-                transition: min-height 0.3s ease-out;
-            }
-            
-            #projects-loading, #projects-error {
-                transition: opacity 0.2s ease-in-out;
-            }
-            
-            #projects-table {
-                transition: opacity 0.2s ease-in-out;
-            }
-            
-            .banners img, .banners iframe {
-                display: block;
-                flex-shrink: 0;
-            }
-            
-            /* Ensure consistent banner sizing */
-            .banners {
-                line-height: 1;
-            }
-            
-            .banners > * {
-                margin: 2px;
-            }
-        `;
-        document.head.appendChild(style);
-        </script>
     </body>
 </html>
