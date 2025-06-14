@@ -109,7 +109,7 @@ window.onload = function() {
                     ctx.drawImage(img, 0, delta * 32);
 
                     for (let i = 0; i < Math.random() * 64; i++) {
-                        ctx.fillStyle = Math.random() > 0.5 ? "#6574a5" : "#0d0e15";
+                        ctx.fillStyle = Math.random() > 0.5 ? "#BE89FF" : "#232136";
                         ctx.beginPath();
                         ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 1.5, 0, 2 * Math.PI);
                         ctx.fill();

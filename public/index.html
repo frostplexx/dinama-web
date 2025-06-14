@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Personal Website</title>
     <link rel="preload" href="/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="stylesheet" href="/catppuccin.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <script type="text/javascript" src="/script.js"></script>
     </head>
 
@@ -28,9 +27,13 @@
                 <header>
                     <h2>cat about.txt</h2>
                 </header>
-                <p>
-                    Hello there! Welcome to my website where I showcase some of my projects and fun ideas. Browse through the files to discover more about my work. If you have any questions or just want to chat, feel free to reach out. Enjoy your time here!
-                </p>
+                <div style="display: flex; flex-direction: row; align-items: center; justify-content: center;">
+                    <div class="hover-gif" onclick="meowPlay()"></div>
+                    <audio id="meow-audio" hidden=""><source src="/assets/meow.mp3" type="audio/mpeg"></audio>
+                    <p>
+                        Hello there! Welcome to my website where I showcase some of my projects and fun ideas. Browse through the files to discover more about my work. If you have any questions or just want to chat, feel free to reach out. Enjoy your time here!
+                    </p>
+                </div>
             </div>
 
             <div class="container">
@@ -159,4 +162,17 @@
         </canvas>
 
     </body>
+    <script>
+    const meow = document.getElementById("meow-audio");
+    meow.preservesPitch = false;
+
+    function meowPlay() {
+        meow.playbackRate = 0.75 + (Math.random() * 0.5);
+        if (meow.paused) {
+            meow.play();
+        } else {
+            meow.currentTime = 0;
+        }
+    }
+    </script>
 </html>
