@@ -13,8 +13,6 @@
             <div>
                 <h1 style="font-family: mono; color: aliceblue;">Cat for you</h1>
             </div>
-            <button onclick="meowPlay()" id="meow-btn">meow</button>
-            <audio id="meow-audio" hidden=""><source src="/assets/meow.mp3" type="audio/mpeg"></audio>
             <img src="https://cataas.com/cat">
         </div>
     </body>
@@ -28,18 +26,5 @@
 
     </style>
 
-    <script>
-    const meow = document.getElementById("meow-audio");
-    meow.preservesPitch = false;
-
-    function meowPlay() {
-        meow.playbackRate = 0.75 + (Math.random() * 0.5);
-        if (meow.paused) {
-            meow.play();
-        } else {
-            meow.currentTime = 0;
-        }
-    }
-    </script>
 
 </html>

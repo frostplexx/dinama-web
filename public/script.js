@@ -1,4 +1,7 @@
 window.onload = function() {
+    console.log("Howdy")
+    loadProjects();
+
     // Toggle functionality
     const crt = document.querySelector('.crt');
     const vignette = document.querySelector('.vignette');
@@ -106,7 +109,7 @@ window.onload = function() {
                     ctx.drawImage(img, 0, delta * 32);
 
                     for (let i = 0; i < Math.random() * 64; i++) {
-                        ctx.fillStyle = Math.random() > 0.5 ? "#6574a5" : "#0d0e15";
+                        ctx.fillStyle = Math.random() > 0.5 ? "#BE89FF" : "#232136";
                         ctx.beginPath();
                         ctx.arc(Math.random() * canvas.width, Math.random() * canvas.height, Math.random() * 1.5, 0, 2 * Math.PI);
                         ctx.fill();
@@ -125,7 +128,6 @@ window.onload = function() {
     resizeCanvas();
     drawBackground();
 
-    // GitHub Projects Loading
     async function loadProjects() {
         const loadingEl = document.getElementById('projects-loading');
         const errorEl = document.getElementById('projects-error');
@@ -137,16 +139,19 @@ window.onload = function() {
             errorEl.style.display = 'none';
             tableEl.style.display = 'none';
 
-            const response = await fetch('/api/github');
+            // Fetch from the pre-built static file
+            const response = await fetch('/data/projects.json');
+
+            console.log(response);
 
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`Failed to load projects data: ${response.status}`);
             }
 
             const data = await response.json();
 
             if (!data.success) {
-                throw new Error(data.message || 'Failed to fetch projects');
+                throw new Error(data.error || 'Failed to load projects');
             }
 
             // Clear existing content
@@ -184,6 +189,19 @@ window.onload = function() {
                 tbodyEl.appendChild(row);
             });
 
+            // Show cache status with build-time info
+            if (data.buildTime) {
+                const buildDate = new Date(data.lastFetched).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+
+            }
+
             loadingEl.style.display = 'none';
             tableEl.style.display = 'table';
 
@@ -194,8 +212,8 @@ window.onload = function() {
 
             // Show a more user-friendly error message
             const errorMessage = errorEl.querySelector('p');
-            if (error.message.includes('fetch')) {
-                errorMessage.textContent = 'Failed to connect to GitHub API. ';
+            if (error.message.includes('Failed to load projects data')) {
+                errorMessage.textContent = 'Projects data not found. The site may not have been built properly. ';
             } else {
                 errorMessage.textContent = `Error: ${error.message} `;
             }
@@ -208,6 +226,4 @@ window.onload = function() {
         retryBtn.addEventListener('click', loadProjects);
     }
 
-    // Load projects when page loads
-    loadProjects();
 };

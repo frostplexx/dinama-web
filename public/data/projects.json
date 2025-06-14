@@ -1,0 +1,84 @@
+{
+  "success": true,
+  "projects": [
+    {
+      "name": "LazyKeys",
+      "url": "https://github.com/frostplexx/LazyKeys",
+      "description": "LazyKeys is a lightweight utility for macOS that remaps capslock to Command + Option + Control",
+      "updatedAt": "2025-06-06T09:39:10Z",
+      "createdAt": "2025-04-26T17:01:21Z",
+      "status": "ACTIVE",
+      "techStack": [
+        "Swift",
+        "Nix",
+        "Makefile",
+        "aerospace"
+      ],
+      "primaryLanguage": {
+        "name": "Swift",
+        "color": "#F05138"
+      },
+      "stars": 0,
+      "forks": 0
+    },
+    {
+      "name": "opsops",
+      "url": "https://github.com/frostplexx/opsops",
+      "description": "A wrapper for sops that integrates 1Password",
+      "updatedAt": "2025-05-29T08:22:28Z",
+      "createdAt": "2025-05-16T10:00:04Z",
+      "status": "ACTIVE",
+      "techStack": [
+        "Rust",
+        "Just",
+        "Nix",
+        "Shell"
+      ],
+      "primaryLanguage": {
+        "name": "Rust",
+        "color": "#dea584"
+      },
+      "stars": 1,
+      "forks": 1
+    },
+    {
+      "name": "obsidian-github-issues",
+      "url": "https://github.com/frostplexx/obsidian-github-issues",
+      "description": "A simple plugin that lets you embed GitHub issues in your Obsidian notes",
+      "updatedAt": "2025-05-16T21:31:24Z",
+      "createdAt": "2023-06-02T10:43:27Z",
+      "status": "ACTIVE",
+      "techStack": [
+        "TypeScript",
+        "CSS",
+        "JavaScript",
+        "obsidian-md"
+      ],
+      "primaryLanguage": {
+        "name": "TypeScript",
+        "color": "#3178c6"
+      },
+      "stars": 44,
+      "forks": 7
+    },
+    {
+      "name": "BinaryTools",
+      "url": "https://github.com/frostplexx/BinaryTools",
+      "description": "A raycast calculator plugin for binary, decimal, hex and octal numbers.",
+      "updatedAt": "2024-04-29T08:21:06Z",
+      "createdAt": "2023-06-18T09:24:19Z",
+      "status": "MAINTENANCE",
+      "techStack": [
+        "TypeScript"
+      ],
+      "primaryLanguage": {
+        "name": "TypeScript",
+        "color": "#3178c6"
+      },
+      "stars": 0,
+      "forks": 0
+    }
+  ],
+  "lastFetched": "2025-06-14T13:40:29.316Z",
+  "buildTime": true
+}
